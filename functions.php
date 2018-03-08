@@ -439,3 +439,14 @@ function create_user_taxonomy() {
 }
 add_action( 'init', 'create_user_taxonomy' );
 
+function add_users_to_taxonomy() {
+	$blogusers = get_users( array( 'fields' => array( 'display_name' ) ) );
+	
+	foreach ( $blogusers as $user ) {
+		$term = term_exists( $user, 'User' );
+		if ( $term == NULL ) {
+			wp_insert_term( $user, 'User' );
+		}
+	}
+}
+add_action( 'after_switch_theme', 'add_users_to_taxonomy' );
