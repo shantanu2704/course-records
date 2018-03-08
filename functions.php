@@ -407,3 +407,35 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
+
+function create_user_taxonomy() {
+	$labels = array(
+		'name'						 => 'cr_Users',
+		'singular_name'				 => 'cr_Athlete',
+		'search_items'				 => 'Search Users',
+		'all_items'					 => 'All Users',
+		'edit_item'					 => 'Edit Users',
+		'update_item'				 => 'Update User',
+		'add_new_item'				 => 'Add New User',
+		'new_item_name'				 => 'New User Name',
+		'menu_name'					 => 'User',
+		'view_item'					 => 'View User',
+		'popular_items'				 => 'Popular User',
+		'separate_items_with_commas' => 'Separate users with commas',
+		'add_or_remove_items'		 => 'Add or remove user',
+		'choose_from_most_used'		 => 'Choose from the most used users',
+		'not_found'					 => 'No users found'
+	);
+	
+	register_taxonomy(
+		'user',
+		'post',
+		array(
+			'label' => __( 'User' ),
+			'hierarchical' => false,
+			'labels' => $labels
+		)
+	);
+}
+add_action( 'init', 'create_user_taxonomy' );
+
