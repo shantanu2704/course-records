@@ -410,8 +410,8 @@ require get_parent_theme_file_path( '/inc/icon-functions.php' );
 
 function create_user_taxonomy() {
 	$labels = array(
-		'name'						 => 'cr_Users',
-		'singular_name'				 => 'cr_Athlete',
+		'name'						 => 'Users',
+		'singular_name'				 => 'User',
 		'search_items'				 => 'Search Users',
 		'all_items'					 => 'All Users',
 		'edit_item'					 => 'Edit Users',
@@ -428,7 +428,7 @@ function create_user_taxonomy() {
 	);
 	
 	register_taxonomy(
-		'user',
+		'User',
 		'post',
 		array(
 			'label' => __( 'User' ),
@@ -440,12 +440,13 @@ function create_user_taxonomy() {
 add_action( 'init', 'create_user_taxonomy' );
 
 function add_users_to_taxonomy() {
-	$blogusers = get_users( array( 'fields' => array( 'display_name' ) ) );
+	$blogusers = get_users( array( 'fields' => array( 'user_login' ) ) );
 	
 	foreach ( $blogusers as $user ) {
-		$term = term_exists( $user, 'User' );
+		$term = term_exists( $user->user_login, 'User' );
 		if ( $term == NULL ) {
-			wp_insert_term( $user, 'User' );
+			$insert = wp_insert_term ($user->user_login, 'User' );
+			
 		}
 	}
 }
