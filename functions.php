@@ -408,7 +408,7 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
 
-function custom_user_profile_fields( $profileuser ) {
+function cr_add_custom_user_profile_fields( $profileuser ) {
 	$user_id = $profileuser->ID;
 	$key = 'slack_username';
 	$single = true;
@@ -429,4 +429,13 @@ function custom_user_profile_fields( $profileuser ) {
 	<?php
 	
 }
-add_action( 'edit_user_profile', 'custom_user_profile_fields' );
+add_action( 'edit_user_profile', 'cr_add_custom_user_profile_fields' );
+
+function cr_save_custom_user_profile_fields( $user_id ) {
+	
+	if ( !current_user_can( 'edit_user', $user_id ) )
+		return FALSE;
+	
+	update_usermeta( $user_id, 'slack_username', $_POST['slack_username'] );
+}
+add_action( 'edit_user_profile_update', 'cr_save_custom_user_profile_fields' );
