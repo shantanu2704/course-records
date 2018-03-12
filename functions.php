@@ -422,7 +422,6 @@ function cr_add_custom_user_profile_fields( $profileuser ) {
 				</th>
 				<td>
 					<input type="text" name="slack_username" id="slack_username" value="<?php echo esc_attr( $user_meta ); ?>" class="regular-text" />
-					<br><span class="description"><?php _e( 'Your Slack Username.', 'text-domain' ); ?></span>
 				</td>
 			</tr>
 		</table>
