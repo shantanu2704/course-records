@@ -407,34 +407,3 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  * SVG icons functions and filters.
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
-
-function cr_add_custom_user_profile_fields( $profileuser ) {
-	$user_id = $profileuser->ID;
-	$key = 'slack_username';
-	$single = true;
-	$user_meta = get_user_meta( $user_id, $key, TRUE );
-	
-?>
-		<table class="form-table">
-			<tr>
-				<th>
-					<label for="slack_username"><?php _e( 'Slack Username' ); ?></label>
-				</th>
-				<td>
-					<input type="text" name="slack_username" id="slack_username" value="<?php echo esc_attr( $user_meta ); ?>" class="regular-text" />
-				</td>
-			</tr>
-		</table>
-	<?php
-	
-}
-add_action( 'edit_user_profile', 'cr_add_custom_user_profile_fields' );
-
-function cr_save_custom_user_profile_fields( $user_id ) {
-	
-	if ( !current_user_can( 'edit_user', $user_id ) )
-		return FALSE;
-	
-	update_usermeta( $user_id, 'slack_username', $_POST['slack_username'] );
-}
-add_action( 'edit_user_profile_update', 'cr_save_custom_user_profile_fields' );
