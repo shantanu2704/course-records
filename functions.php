@@ -408,46 +408,11 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
  */
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
 
-function create_user_taxonomy() {
-	$labels = array(
-		'name'						 => 'Users',
-		'singular_name'				 => 'User',
-		'search_items'				 => 'Search Users',
-		'all_items'					 => 'All Users',
-		'edit_item'					 => 'Edit Users',
-		'update_item'				 => 'Update User',
-		'add_new_item'				 => 'Add New User',
-		'new_item_name'				 => 'New User Name',
-		'menu_name'					 => 'User',
-		'view_item'					 => 'View User',
-		'popular_items'				 => 'Popular User',
-		'separate_items_with_commas' => 'Separate users with commas',
-		'add_or_remove_items'		 => 'Add or remove user',
-		'choose_from_most_used'		 => 'Choose from the most used users',
-		'not_found'					 => 'No users found'
-	);
-	
-	register_taxonomy(
-		'User',
-		'post',
-		array(
-			'label' => __( 'User' ),
-			'hierarchical' => false,
-			'labels' => $labels
-		)
-	);
-}
-add_action( 'init', 'create_user_taxonomy' );
+/**
+ * Register custom types.
+ */
+require get_parent_theme_file_path( '/modules/custom-types/class-register-custom-types.php' );
+$cr_register = new Register_Custom_Types();
+$cr_register->init();
 
-function add_users_to_taxonomy() {
-	$blogusers = get_users( array( 'fields' => array( 'user_login' ) ) );
 	
-	foreach ( $blogusers as $user ) {
-		$term = term_exists( $user->user_login, 'User' );
-		if ( $term == NULL ) {
-			$insert = wp_insert_term ($user->user_login, 'User' );
-			
-		}
-	}
-}
-add_action( 'after_switch_theme', 'add_users_to_taxonomy' );
