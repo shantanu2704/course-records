@@ -18,6 +18,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 	 */
 	class Register_Custom_Types {
 		
+		// Initalise the class
 		public function init() {
 			
 			// Hook into 'init' to register the custom taxonomy - 'User'
@@ -31,8 +32,6 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 		
 		
 		/**
-		 * Register User Taxonomy
-		 * 
 		 * Register the custom taxonomy - 'User'
 		 * 
 		 * @since 0.0.1 
@@ -71,8 +70,6 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 		}
 		
 		/**
-		 * Add users to taxonomy
-		 * 
 		 * Fetch all the users on the side and add their usernames as 'terms' of the 
 		 * 'User' taxonomy
 		 * 
