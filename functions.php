@@ -409,6 +409,13 @@ require get_parent_theme_file_path( '/inc/customizer.php' );
 require get_parent_theme_file_path( '/inc/icon-functions.php' );
 
 /**
+ * Register custom types.
+ */
+require get_parent_theme_file_path( '/modules/custom-types/class-register-custom-types.php' );
+$cr_register = new Register_Custom_Types();
+$cr_register->init();
+
+/**	
  * User meta.
  */
 require get_parent_theme_file_path( '/modules/user-meta/class-user-meta.php' );
