@@ -99,7 +99,11 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 			}
 		}
 		
-
+		/**
+		 * Register custom post type - Task
+		 * 
+		 * @since 0.0.1
+		 */
 		function register_task_post_type() {
 			$labels = array(
 				'name'				 => __( 'Tasks', 'twentyseventeen' ),
@@ -136,6 +140,11 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 			register_post_type( 'task', $args );
 		}
 
+		/**
+		 * Register custom post type - Question
+		 * 
+		 * @since 0.0.1
+		 */
 		function register_question_post_type() {
 			$labels = array(
 				'name'				 => __( 'Questions', 'twentyseventeen' ),
@@ -172,6 +181,11 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 			register_post_type( 'question', $args );
 		}
 
+		/**
+		 * Register custom post type - Message
+		 * 
+		 * @since 0.0.1
+		 */
 		function register_message_post_type() {
 			$labels = array(
 				'name'				 => __( 'Messages', 'twentyseventeen' ),
@@ -208,7 +222,12 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 			register_post_type( 'message', $args );
 		}
 		
-		function register_reports_post_type() {
+		/**
+		 * Register custom post type - Report
+		 * 
+		 * @since 0.0.1
+		 */
+		function register_report_post_type() {
 			$labels = array(
 				'name'				 => __( 'Reports', 'twentyseventeen' ),
 				'singular_name'		 => __( 'Report', 'twentyseventeen' ),
