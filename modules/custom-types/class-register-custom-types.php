@@ -134,6 +134,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'has_archive'		 => true,
 				'hierarchical'		 => false,
 				'menu_position'		 => null,
+				'taxonomies'		 => array( 'User' ),
 				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 
@@ -175,6 +176,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'has_archive'		 => true,
 				'hierarchical'		 => false,
 				'menu_position'		 => null,
+				'taxonomies'		 => array( 'User' ),
 				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 
@@ -216,6 +218,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'has_archive'		 => true,
 				'hierarchical'		 => false,
 				'menu_position'		 => null,
+				'taxonomies'		 => array( 'User' ),
 				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 
@@ -257,6 +260,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'has_archive'		 => true,
 				'hierarchical'		 => false,
 				'menu_position'		 => null,
+				'taxonomies'		 => array( 'User' ),
 				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 
