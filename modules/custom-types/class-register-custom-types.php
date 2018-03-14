@@ -170,6 +170,41 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 			register_post_type( 'question', $args );
 		}
 
+		function register_message_post_type() {
+			$labels = array(
+				'name'				 => __( 'Messages', 'twentyseventeen' ),
+				'singular_name'		 => __( 'Message', 'twentyseventeen' ),
+				'menu_name'			 => __( 'Messages', 'twentyseventeen' ),
+				'name_admin_bar'	 => __( 'Message', 'twentyseventeen' ),
+				'add_new'			 => __( 'Add New', 'twentyseventeen' ),
+				'add_new_item'		 => __( 'Add New Message', 'twentyseventeen' ),
+				'new_item'			 => __( 'New Message', 'twentyseventeen' ),
+				'edit_item'			 => __( 'Edit Message', 'twentyseventeen' ),
+				'view_item'			 => __( 'View Message', 'twentyseventeen' ),
+				'all_items'			 => __( 'All Messages', 'twentyseventeen' ),
+				'search_items'		 => __( 'Search Messages', 'twentyseventeen' ),
+				'parent_item_colon'	 => __( 'Parent Messages:', 'twentyseventeen' ),
+				'not_found'			 => __( 'No tasks found.', 'twentyseventeen' ),
+				'not_found_in_trash' => __( 'No tasks found in Trash.', 'twentyseventeen' )
+			);
+
+			$args = array(
+				'labels'			 => $labels,
+				'public'			 => true,
+				'publicly_queryable' => true,
+				'show_ui'			 => true,
+				'show_in_menu'		 => true,
+				'query_var'			 => true,
+				'rewrite'			 => array( 'slug' => 'message' ),
+				'capability_type'	 => 'post',
+				'has_archive'		 => true,
+				'hierarchical'		 => false,
+				'menu_position'		 => null,
+				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+			);
+
+			register_post_type( 'message', $args );
+		}
 
 	}
 
