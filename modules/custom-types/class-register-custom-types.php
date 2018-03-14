@@ -30,6 +30,9 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 			add_action( 'after_switch_theme', array( $this, 'add_users_to_taxonomy' ) );
 			
 			add_action( 'init', array( $this, 'register_task_post_type' ) );
+			
+			add_action( 'init', array( $this, 'register_question_post_type' ) );
+
 		}
 		
 		
@@ -97,19 +100,19 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 
 		function register_task_post_type() {
 			$labels = array(
-				'name'				 => __( 'Tasks',  					'twentyseventeen' ),
-				'singular_name'		 => __( 'Task', 					'twentyseventeen' ),
-				'menu_name'			 => __( 'Tasks',			 		'twentyseventeen' ),
-				'name_admin_bar'	 => __( 'Task', 					'twentyseventeen' ),
-				'add_new'			 => __( 'Add New', 					'twentyseventeen' ),
-				'add_new_item'		 => __( 'Add New Task', 			'twentyseventeen' ),
-				'new_item'			 => __( 'New Task', 				'twentyseventeen' ),
-				'edit_item'			 => __( 'Edit Task', 				'twentyseventeen' ),
-				'view_item'			 => __( 'View Task', 				'twentyseventeen' ),
-				'all_items'			 => __( 'All Tasks', 				'twentyseventeen' ),
-				'search_items'		 => __( 'Search Tasks', 			'twentyseventeen' ),
-				'parent_item_colon'	 => __( 'Parent Tasks:', 			'twentyseventeen' ),
-				'not_found'			 => __( 'No tasks found.', 			'twentyseventeen' ),
+				'name'				 => __( 'Tasks', 'twentyseventeen' ),
+				'singular_name'		 => __( 'Task', 'twentyseventeen' ),
+				'menu_name'			 => __( 'Tasks', 'twentyseventeen' ),
+				'name_admin_bar'	 => __( 'Task', 'twentyseventeen' ),
+				'add_new'			 => __( 'Add New', 'twentyseventeen' ),
+				'add_new_item'		 => __( 'Add New Task', 'twentyseventeen' ),
+				'new_item'			 => __( 'New Task', 'twentyseventeen' ),
+				'edit_item'			 => __( 'Edit Task', 'twentyseventeen' ),
+				'view_item'			 => __( 'View Task', 'twentyseventeen' ),
+				'all_items'			 => __( 'All Tasks', 'twentyseventeen' ),
+				'search_items'		 => __( 'Search Tasks', 'twentyseventeen' ),
+				'parent_item_colon'	 => __( 'Parent Tasks:', 'twentyseventeen' ),
+				'not_found'			 => __( 'No tasks found.', 'twentyseventeen' ),
 				'not_found_in_trash' => __( 'No tasks found in Trash.', 'twentyseventeen' )
 			);
 
@@ -120,7 +123,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'show_ui'			 => true,
 				'show_in_menu'		 => true,
 				'query_var'			 => true,
-				'rewrite'			 => array( 'slug' => 'book' ),
+				'rewrite'			 => array( 'slug' => 'task' ),
 				'capability_type'	 => 'post',
 				'has_archive'		 => true,
 				'hierarchical'		 => false,
@@ -130,6 +133,43 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 
 			register_post_type( 'task', $args );
 		}
+
+		function register_question_post_type() {
+			$labels = array(
+				'name'				 => __( 'Questions', 'twentyseventeen' ),
+				'singular_name'		 => __( 'Question', 'twentyseventeen' ),
+				'menu_name'			 => __( 'Questions', 'twentyseventeen' ),
+				'name_admin_bar'	 => __( 'Question', 'twentyseventeen' ),
+				'add_new'			 => __( 'Add New', 'twentyseventeen' ),
+				'add_new_item'		 => __( 'Add New Question', 'twentyseventeen' ),
+				'new_item'			 => __( 'New Question', 'twentyseventeen' ),
+				'edit_item'			 => __( 'Edit Question', 'twentyseventeen' ),
+				'view_item'			 => __( 'View Question', 'twentyseventeen' ),
+				'all_items'			 => __( 'All Questions', 'twentyseventeen' ),
+				'search_items'		 => __( 'Search Questions', 'twentyseventeen' ),
+				'parent_item_colon'	 => __( 'Parent Questions:', 'twentyseventeen' ),
+				'not_found'			 => __( 'No tasks found.', 'twentyseventeen' ),
+				'not_found_in_trash' => __( 'No tasks found in Trash.', 'twentyseventeen' )
+			);
+
+			$args = array(
+				'labels'			 => $labels,
+				'public'			 => true,
+				'publicly_queryable' => true,
+				'show_ui'			 => true,
+				'show_in_menu'		 => true,
+				'query_var'			 => true,
+				'rewrite'			 => array( 'slug' => 'question' ),
+				'capability_type'	 => 'post',
+				'has_archive'		 => true,
+				'hierarchical'		 => false,
+				'menu_position'		 => null,
+				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+			);
+
+			register_post_type( 'question', $args );
+		}
+
 
 	}
 
