@@ -20,22 +20,24 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 		
 		// Initalise the class
 		public function init() {
-			
+
 			// Hook into 'init' to register the custom taxonomy - 'User'
 			add_action( 'init', array( $this, 'register_user_taxonomy' ) );
-			
+
 			// Hook into 'after_switch_theme' to add terms(usernames) to the 
 			// custom taxonomy 'User'. 
 			// This hook is chosen because it runs everytime we switch to this theme.
 			add_action( 'after_switch_theme', array( $this, 'add_users_to_taxonomy' ) );
-			
+
 			add_action( 'init', array( $this, 'register_task_post_type' ) );
-			
+
 			add_action( 'init', array( $this, 'register_question_post_type' ) );
 
+			add_action( 'init', array( $this, 'register_message_post_type' ) );
+
+			add_action( 'init', array( $this, 'register_report_post_type' ) );
 		}
-		
-		
+
 		/**
 		 * Register the custom taxonomy - 'User'
 		 * 
@@ -148,8 +150,8 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'all_items'			 => __( 'All Questions', 'twentyseventeen' ),
 				'search_items'		 => __( 'Search Questions', 'twentyseventeen' ),
 				'parent_item_colon'	 => __( 'Parent Questions:', 'twentyseventeen' ),
-				'not_found'			 => __( 'No tasks found.', 'twentyseventeen' ),
-				'not_found_in_trash' => __( 'No tasks found in Trash.', 'twentyseventeen' )
+				'not_found'			 => __( 'No questions found.', 'twentyseventeen' ),
+				'not_found_in_trash' => __( 'No questions found in Trash.', 'twentyseventeen' )
 			);
 
 			$args = array(
@@ -184,8 +186,8 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'all_items'			 => __( 'All Messages', 'twentyseventeen' ),
 				'search_items'		 => __( 'Search Messages', 'twentyseventeen' ),
 				'parent_item_colon'	 => __( 'Parent Messages:', 'twentyseventeen' ),
-				'not_found'			 => __( 'No tasks found.', 'twentyseventeen' ),
-				'not_found_in_trash' => __( 'No tasks found in Trash.', 'twentyseventeen' )
+				'not_found'			 => __( 'No messages found.', 'twentyseventeen' ),
+				'not_found_in_trash' => __( 'No messages found in Trash.', 'twentyseventeen' )
 			);
 
 			$args = array(
@@ -204,6 +206,42 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 			);
 
 			register_post_type( 'message', $args );
+		}
+		
+		function register_reports_post_type() {
+			$labels = array(
+				'name'				 => __( 'Reports', 'twentyseventeen' ),
+				'singular_name'		 => __( 'Report', 'twentyseventeen' ),
+				'menu_name'			 => __( 'Reports', 'twentyseventeen' ),
+				'name_admin_bar'	 => __( 'Report', 'twentyseventeen' ),
+				'add_new'			 => __( 'Add New', 'twentyseventeen' ),
+				'add_new_item'		 => __( 'Add New Report', 'twentyseventeen' ),
+				'new_item'			 => __( 'New Report', 'twentyseventeen' ),
+				'edit_item'			 => __( 'Edit Report', 'twentyseventeen' ),
+				'view_item'			 => __( 'View Report', 'twentyseventeen' ),
+				'all_items'			 => __( 'All Reports', 'twentyseventeen' ),
+				'search_items'		 => __( 'Search Reports', 'twentyseventeen' ),
+				'parent_item_colon'	 => __( 'Parent Reports:', 'twentyseventeen' ),
+				'not_found'			 => __( 'No reports found.', 'twentyseventeen' ),
+				'not_found_in_trash' => __( 'No reports found in Trash.', 'twentyseventeen' )
+			);
+
+			$args = array(
+				'labels'			 => $labels,
+				'public'			 => true,
+				'publicly_queryable' => true,
+				'show_ui'			 => true,
+				'show_in_menu'		 => true,
+				'query_var'			 => true,
+				'rewrite'			 => array( 'slug' => 'report' ),
+				'capability_type'	 => 'post',
+				'has_archive'		 => true,
+				'hierarchical'		 => false,
+				'menu_position'		 => null,
+				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
+			);
+
+			register_post_type( 'report', $args );
 		}
 
 	}
