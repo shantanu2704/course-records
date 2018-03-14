@@ -105,6 +105,8 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 		 * @since 0.0.1
 		 */
 		function register_task_post_type() {
+			
+			// Define labels for CPT - Task
 			$labels = array(
 				'name'				 => __( 'Tasks', 'twentyseventeen' ),
 				'singular_name'		 => __( 'Task', 'twentyseventeen' ),
@@ -122,6 +124,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'not_found_in_trash' => __( 'No tasks found in Trash.', 'twentyseventeen' )
 			);
 
+			// Define arguments for CPT - Task
 			$args = array(
 				'labels'			 => $labels,
 				'public'			 => true,
@@ -147,6 +150,8 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 		 * @since 0.0.1
 		 */
 		function register_question_post_type() {
+			
+			// Define labels for CPT - Question
 			$labels = array(
 				'name'				 => __( 'Questions', 'twentyseventeen' ),
 				'singular_name'		 => __( 'Question', 'twentyseventeen' ),
@@ -164,6 +169,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'not_found_in_trash' => __( 'No questions found in Trash.', 'twentyseventeen' )
 			);
 
+			// Define arguments for CPT - Question
 			$args = array(
 				'labels'			 => $labels,
 				'public'			 => true,
@@ -180,6 +186,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 
+			// Register custom post type
 			register_post_type( 'question', $args );
 		}
 
@@ -189,6 +196,8 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 		 * @since 0.0.1
 		 */
 		function register_message_post_type() {
+			
+			// Define labels for CPT - Message
 			$labels = array(
 				'name'				 => __( 'Messages', 'twentyseventeen' ),
 				'singular_name'		 => __( 'Message', 'twentyseventeen' ),
@@ -206,6 +215,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'not_found_in_trash' => __( 'No messages found in Trash.', 'twentyseventeen' )
 			);
 
+			// Define arguments for CPT - Message
 			$args = array(
 				'labels'			 => $labels,
 				'public'			 => true,
@@ -222,6 +232,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 
+			// Register custom post type
 			register_post_type( 'message', $args );
 		}
 		
@@ -231,6 +242,8 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 		 * @since 0.0.1
 		 */
 		function register_report_post_type() {
+			
+			// Define labels for CPT - Report
 			$labels = array(
 				'name'				 => __( 'Reports', 'twentyseventeen' ),
 				'singular_name'		 => __( 'Report', 'twentyseventeen' ),
@@ -248,6 +261,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'not_found_in_trash' => __( 'No reports found in Trash.', 'twentyseventeen' )
 			);
 
+			// Define arguments for CPT - Report
 			$args = array(
 				'labels'			 => $labels,
 				'public'			 => true,
@@ -264,6 +278,7 @@ if ( !class_exists( 'Register_Custom_Types' ) ) {
 				'supports'			 => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' )
 			);
 
+			// Register custom post type
 			register_post_type( 'report', $args );
 		}
 
