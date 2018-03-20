@@ -26,9 +26,21 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		function init() {
 			
-			add_action( 'admin_menu', array( $this, 'my_plugin_menu' ) );
-			
+			// Hook into this action to add an extra submenu
+			add_action( 'admin_menu', array( $this, 'add_input_page' ) );	
 		}
+		
+		/**
+		 * Add input page
+		 * 
+		 * @since 0.0.1
+		 */
+		function add_input_page() {
+			
+			// Add a submenu to the 'Posts' menu
+			add_posts_page( 'Slack Input', 'Slack Importer', 'read', 'slack-importer', array ( $this, 'form_page_content' ) );
+		}
+
 	}
 
 }
