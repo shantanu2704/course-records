@@ -13,12 +13,22 @@ if ( !defined( 'ABSPATH' ) )	exit();
 if ( !class_exists( 'Slack_Input' ) ) {
 
 	/**
-	 * Register Custom Types
+	 * Slack Input
 	 *
 	 * @since 0.0.1
 	 */
 	class Slack_Input {
 		
+		/**
+		 * Initialise the class
+		 * 
+		 * @since 0.0.1
+		 */
+		function init() {
+			
+			add_action( 'admin_menu', array( $this, 'my_plugin_menu' ) );
+			
+		}
 	}
 
 }
