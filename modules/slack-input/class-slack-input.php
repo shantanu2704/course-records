@@ -40,6 +40,19 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			// Add a submenu to the 'Posts' menu
 			add_posts_page( 'Slack Input', 'Slack Importer', 'read', 'slack-importer', array ( $this, 'form_page_content' ) );
 		}
+		
+		/**
+		 * Form page content
+		 * 
+		 * @since 0.0.1
+		 */
+		function form_page_content() {
+			?>
+				<label for="json_input"><?php _e( 'JSON Input' ); ?></label>
+				<input type="text" name="json_input" id="json_input" value="<?php echo "Hello" ?>" class="regular-text" />
+
+			<?php
+		}
 
 	}
 
