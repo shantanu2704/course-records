@@ -20,6 +20,11 @@ if ( !class_exists( 'Slack_Input' ) ) {
 	class Slack_Input {
 		
 		/**
+		 * Contents of the json file
+		 */
+		public $input_file;
+		
+		/**
 		 * Initialise the class
 		 * 
 		 * @since 0.0.1
@@ -78,13 +83,21 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			<?php
 		}
 		
+		/**
+		 * Process the input file
+		 */
 		function process_input_file() {
+			// Define the path to the uploads directory
 			$uploads_path = WP_CONTENT_DIR . '/uploads';
 
+			// Check if the form is submitted
 			if ( isset( $_POST[ 'json_import' ] ) ) {
-				$file_name		 = $uploads_path . $_POST[ 'cr_json_file' ];
-				$handle			 = fopen( $file_name, 'r' );
-				$file_content	 = fread( $handle, filesize( $file_name ) );
+				// Get the user input
+				$file_name			 = $uploads_path . $_POST[ 'cr_json_file' ];
+				// Open the input file in read mode
+				$handle				 = fopen( $file_name, 'r' );
+				// Store the contents of the file in the 'input_file' property
+				$this->input_file	 = fread( $handle, filesize( $file_name ) );
 			}
 		}
 
