@@ -48,6 +48,8 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		function form_page_content() {
 
+			$this->process_input_file();
+			
 			$dir		 = wp_upload_dir();
 			$contents	 = opendir( $dir[ 'basedir' ] );
 			$files		 = array();
@@ -64,16 +66,26 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			?>
 			<div class="wrap">
 				<form action="" method="POST">
-					<label for="cr_json_files">Select JSON file</label>
-					<select name="cr_json_files" id="cr_json_files">
+					<label for="cr_json_file">Select JSON file</label>
+					<select name="cr_json_file" id="cr_json_file">
 					<?php foreach ( $files as $file ) : ?>
 						<option value="<?php echo esc_attr( $file ); ?>" ><?php echo esc_html( $file ); ?></option>
 					<?php endforeach; ?>
 					</select>
-					<button type="submit">Import</button>
+					<button type="submit" name="json_import" value="import">Import</button>
 				</form>
 			</div>
 			<?php
+		}
+		
+		function process_input_file() {
+			$uploads_path = WP_CONTENT_DIR . '/uploads';
+
+			if ( isset( $_POST[ 'json_import' ] ) ) {
+				$file_name		 = $uploads_path . $_POST[ 'cr_json_file' ];
+				$handle			 = fopen( $file_name, 'r' );
+				$file_content	 = fread( $handle, filesize( $file_name ) );
+			}
 		}
 
 	}
