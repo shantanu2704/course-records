@@ -24,6 +24,8 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		public $input_file;
 		
+		public $last_input;
+		
 		/**
 		 * Initialise the class
 		 * 
@@ -76,13 +78,15 @@ if ( !class_exists( 'Slack_Input' ) ) {
 					<label for="cr_json_file">Select JSON file</label>
 					<select name="cr_json_file" id="cr_json_file">
 					<?php foreach ( $files as $file ) : ?>
-						<option value="<?php echo esc_attr( $file ); ?>" ><?php echo esc_html( $file ); ?></option>
+						<option value="<?php echo esc_attr( $file ); ?>" <?php selected( $file, $this->last_input ) ?>><?php echo esc_html( $file ); ?></option>
 					<?php endforeach; ?>
 					</select>
 					<button type="submit" name="json_import" value="import">Import</button>
 				</form>
 			</div>
 			<?php
+			$this->process_json();
+			
 		}
 		
 		/**
@@ -100,7 +104,14 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				$handle				 = fopen( $file_name, 'r' );
 				// Store the contents of the file in the 'input_file' property
 				$this->input_file	 = fread( $handle, filesize( $file_name ) );
+				$this->last_input = $_POST[ 'cr_json_file' ];
 			}
+		}
+		
+		function process_json() {
+			$json_inpiut = json_decode($this->input_file);
+			print_r($json_inpiut);
+			wp_die();
 		}
 
 	}
