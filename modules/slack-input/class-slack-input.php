@@ -52,18 +52,20 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 * @since 0.0.1
 		 */
 		function form_page_content() {
-
+			// Process the input file
 			$this->process_input_file();
-			
-			$dir		 = wp_upload_dir();
-			$contents	 = opendir( $dir[ 'basedir' ] );
+
+			// Define the uploads directory
+			$upload_dir = WP_CONTENT_DIR . '/uploads/';
+			// Open the directory
+			$contents	 = opendir( $upload_dir );
 			$files		 = array();
 
+			// Loop over the directory
 			while ( false !== ($entry = readdir( $contents ) ) ) {
-
-				$file_path = $dir[ 'basedir' ] . '/' . $entry;
-
-				if ( is_file( $file_path ) ) {
+				// Check if current item is a file
+				if ( is_file( $upload_dir . $entry ) ) {
+					// If yes, push it on to the list of files.
 					array_push( $files, $entry );
 				}
 			}
@@ -88,7 +90,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		function process_input_file() {
 			// Define the path to the uploads directory
-			$uploads_path = WP_CONTENT_DIR . '/uploads';
+			$uploads_path = WP_CONTENT_DIR . '/uploads/';
 
 			// Check if the form is submitted
 			if ( isset( $_POST[ 'json_import' ] ) ) {
