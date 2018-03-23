@@ -70,6 +70,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 						<option value="<?php echo esc_attr( $file ); ?>" ><?php echo esc_html( $file ); ?></option>
 					<?php endforeach; ?>
 					</select>
+					<button type="submit">Import</button>
 				</form>
 			</div>
 			<?php
