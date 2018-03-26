@@ -59,9 +59,9 @@ if ( !class_exists( 'Post_Factory' ) ) {
 
 		private function is_question( $content ) {
 			if ( isset( $content[ 'text' ] ) ) {
-				$query			 = '<@U9DQ94KM3> <U9ATTAU00>';
-				$return_value	 = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
-				return $return_value;
+				$query		 = '<@U9DQ94KM3> <U9ATTAU00>';
+				$is_question = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
+				return $is_question;
 			}
 		}
 
