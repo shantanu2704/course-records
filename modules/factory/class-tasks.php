@@ -42,7 +42,15 @@ if ( !class_exists( 'Tasks' ) ) {
 			// Insert post into database
 			return wp_insert_post( $my_post );
 		}
-
+		
+		/**
+		 * Get Post ID of the task
+		 * @return int Post ID of the Task
+		 * @since 0.0.1
+		 */
+		public function get_task_post_id() {
+			return $this->post_id;
+		}
 
 	}
 
