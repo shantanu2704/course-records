@@ -24,8 +24,6 @@ if ( !class_exists( 'Messages' ) ) {
 		
 		private $broadcast;
 		
-		private $post_id;
-		
 		/**
 		 * Constructor
 		 * @param array $json_input Decoded JSON input array for a message
@@ -50,14 +48,6 @@ if ( !class_exists( 'Messages' ) ) {
 			);
 			// Insert post into database
 			return wp_insert_post( $my_post );
-		}
-		 /**
-		  * Get Post ID of the message
-		  * @return int Post ID of the Message
-		  * @since 0.0.1
-		  */
-		public function get_message_post_id() {
-			return $this->post_id;
 		}
 	}
 }
