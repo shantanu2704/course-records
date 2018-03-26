@@ -57,6 +57,7 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 * @since 0.0.1
 		 */
 		private function is_thread_message( $content ) {
+			// Check if the 'thread_ts' key exists in the json array
 			$is_thread_message = ( array_key_exists( 'thread_ts', $content ) ) ? TRUE : FALSE;
 			return $is_thread_message;
 		}
@@ -67,10 +68,20 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 * @return bool
 		 */
 		private function is_task( $content ) {
+			// 'text' contains the message contents
 			if ( isset( $content[ 'text' ] ) ) {
-				$query	 = '<@U9DQ94KM3> <!channel>';
-				$is_task = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
-				return $is_task;
+				$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
+				$channel = '<!channel>'; // User ID for channel
+
+				// Check if both of the strings appear in the message
+				if ( ( strpos( $content[ 'text' ], $must_read ) !== false ) && 
+				     ( strpos( $content[ 'text' ], $channel ) !== false) ) {
+					return true;
+				}else {
+					return false;
+				}
+			} else {
+				return false;
 			}
 		}
 
@@ -81,10 +92,21 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 * @since 0.0.1
 		 */
 		private function is_question( $content ) {
+			// 'text' contains the message contents
 			if ( isset( $content[ 'text' ] ) ) {
-				$query		 = '<@U9DQ94KM3> <U9ATTAU00>';
-				$is_question = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
-				return $is_question;
+				$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
+				$saurabh = '<U9ATTAU00>'; // User ID for Saurabh
+				
+				// Check if both of the strings appear in the message
+				if ( ( strpos( $content[ 'text' ], $must_read ) !== false ) &&
+				     ( strpos( $content[ 'text' ], $saurabh ) !== false) ) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			} else {
+				return false;
 			}
 		}
 
