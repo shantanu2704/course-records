@@ -424,7 +424,6 @@ $user_meta->init();
 
 /**
  * Slack input
- *
  */
 require get_parent_theme_file_path( '/modules/slack-input/class-slack-input.php' );
 $slack_input = new Slack_Input();
