@@ -40,10 +40,6 @@ if ( !class_exists( 'Post_Factory' ) ) {
 			}
 		}
 
-		private function is_message() {
-			
-		}
-
 		private function is_thread_message( $content ) {
 			$is_thread_message = ( array_key_exists( 'thread_ts', $content ) ) ? TRUE : FALSE;
 			return $is_thread_message;
