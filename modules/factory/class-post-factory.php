@@ -27,7 +27,6 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 */
 		public function __construct( $json_input ) {
 			$this->json_content = $json_input;
-			$this->instantiate_classes( $this->json_content );
 		}
 
 		/**
