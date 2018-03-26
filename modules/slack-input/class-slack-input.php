@@ -111,9 +111,9 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		function process_json() {
 			// Decode the json and get the result as an associative array
 			$json_input = json_decode( $this->input_file, true );
-			$post_factory = new Post_Factory ();
+			$post_factory = new Post_Factory();
 			foreach ( $json_input as $post ) {
-				
+				$post_factory->instantiate_classes( $post );
 			}
 		}
 
