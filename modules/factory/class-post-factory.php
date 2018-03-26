@@ -36,10 +36,10 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		public function instantiate_classes( $post_type ) {
 			
 			if ( $post_type === 'Task' ) {
-				$task = new Task( $this->content ); // Create new Task
+				$task = new Tasks( $this->content ); // Create new Task
 				return $task->add_task();
 			}elseif ( $post_type === 'Question' ) {
-				$question = new Question( $this->content ); // Create new Question
+				$question = new Questions( $this->content ); // Create new Question
 				return $question->add_question();
 			}elseif ( $post_type === 'Thread Message' ) {
 				$message = new Messages( $this->content, true, true ); // Create new thread Message		
