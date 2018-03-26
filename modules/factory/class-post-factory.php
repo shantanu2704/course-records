@@ -35,7 +35,7 @@ if ( !class_exists( 'Post_Factory' ) ) {
 				$task = new Question( $content );
 			}elseif ( $this->is_message() && $this->is_thread_message() ) {
 				$message = new Message( $content, true );
-			}elseif ( $this->is_message() && !$this->is_thread_message() ) {
+			}else {
 				$message = new Message( $content, false );
 			}
 		}
@@ -50,14 +50,18 @@ if ( !class_exists( 'Post_Factory' ) ) {
 
 		private function is_task( $content ) {
 			if ( isset( $content[ 'text' ] ) ) {
-				$query = '<@U9DQ94KM3> <!channel>';
-				$return_value = substr( $content[ 'text' ], 0, strlen( $query ) ) === $query ? TRUE : FALSE;
+				$query			 = '<@U9DQ94KM3> <!channel>';
+				$return_value	 = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
 				return $return_value;
 			}
 		}
 
-		private function is_question() {
-			
+		private function is_question( $content ) {
+			if ( isset( $content[ 'text' ] ) ) {
+				$query			 = '<@U9DQ94KM3> <U9ATTAU00>';
+				$return_value	 = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
+				return $return_value;
+			}
 		}
 
 	}
