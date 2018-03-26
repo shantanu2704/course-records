@@ -35,5 +35,19 @@ if ( !class_exists( 'Messages' ) ) {
 			$this->thread = $is_thread;
 			$this->broadcast = $was_broadcasted;
 		}
+		
+		private function add_message() {
+			// Create post object
+			$my_post = array(
+				'post_author' => $this->content[ 'name' ],
+				'post_date' => substr($this->content[ 'datetime' ], 0, 10 ),
+				'post_content' => $this->content[ 'text' ],
+				'post_status' => 'publish',
+				'post_type' => 'message',
+				'comment_status' => 'open',				
+			);
+			// Insert post into database
+			wp_insert_post( $my_post );
+		}
 	}
 }
