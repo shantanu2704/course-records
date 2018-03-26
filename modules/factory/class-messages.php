@@ -38,7 +38,7 @@ if ( !class_exists( 'Messages' ) ) {
 			$this->broadcast = $was_broadcasted;
 		}
 		
-		private function add_message() {
+		public function add_message() {
 			// Create post object
 			$my_post = array(
 				'post_author' => $this->content[ 'name' ],
@@ -49,7 +49,7 @@ if ( !class_exists( 'Messages' ) ) {
 				'comment_status' => 'open',				
 			);
 			// Insert post into database
-			$this->post_id = wp_insert_post( $my_post );
+			return wp_insert_post( $my_post );
 		}
 		 /**
 		  * Get Post ID of the message

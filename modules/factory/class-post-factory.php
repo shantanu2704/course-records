@@ -33,10 +33,11 @@ if ( !class_exists( 'Post_Factory' ) ) {
 				$task = new Question( $content ); // Create new Question
 			}// Or if it is a message in a thread
 			elseif ( $this->is_thread_message() ) {
-				$message = new Message( $content, true, true ); // Create new thread Message
+				$message = new Messages( $content, true, true ); // Create new thread Message		
+				$post_id = $message->add_message();
 			}// Or is just a regular message
 			else {
-				$message = new Message( $content ); // Create new Message
+				$message = new Messages( $content ); // Create new Message
 			}
 		}
 
