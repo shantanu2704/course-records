@@ -35,6 +35,7 @@ if ( !class_exists( 'Post_Factory' ) ) {
 			elseif ( $this->is_thread_message() ) {
 				$message = new Messages( $content, true, true ); // Create new thread Message		
 				$post_id = $message->add_message();
+				return $post_id;
 			}// Or is just a regular message
 			else {
 				$message = new Messages( $content ); // Create new Message
@@ -67,10 +68,9 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 * @return bool
 		 * @since 0.0.1
 		 */
-		private function is_thread_message( $content ) {
+		public function is_thread_message( $content ) {
 			// Check if the 'thread_ts' key exists in the json array
-			$is_thread_message = ( array_key_exists( 'thread_ts', $content ) ) ? TRUE : FALSE;
-			return $is_thread_message;
+			return array_key_exists( 'thread_ts', $content );
 		}
 
 		/**

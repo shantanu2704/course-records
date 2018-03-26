@@ -113,7 +113,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			$json_input = json_decode( $this->input_file, true );
 			$post_factory = new Post_Factory();
 			foreach ( $json_input as $post ) {
-				$is_thread_message = isset( $post[ 'thread_ts' ] );
+				$is_thread_message = $post_factory->is_thread_message( $post );
 				$post_id = $post_factory->instantiate_classes( $post );
 			}
 		}
