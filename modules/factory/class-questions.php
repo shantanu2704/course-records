@@ -42,6 +42,15 @@ if ( !class_exists( 'Questions' ) ) {
 			// Insert post into database
 			return wp_insert_post( $my_post );
 		}
+		
+		/**
+		 * Get Post ID of the question
+		 * @return int Post ID of the Question
+		 * @since 0.0.1
+		 */
+		public function get_question_post_id() {
+			return $this->post_id;
+		}
 
 	}
 
