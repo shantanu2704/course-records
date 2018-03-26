@@ -7,7 +7,7 @@
  * @since 0.0.1
  */
 // If this file is called directly, abort.
-if ( !defined( 'ABSPATH' ) )	exit();
+if ( !defined( 'ABSPATH' ) ) exit();
 
 if ( !class_exists( 'Post_Factory' ) ) {
 
@@ -29,24 +29,33 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		}
 
 		private function instantiate_classes( $content ) {
-			
+			if ( $this->is_task() ) {
+				$task = new Task( $content );
+			}elseif ( $this->is_question() ) {
+				$task = new Question( $content );
+			}elseif ( $this->is_message() && $this->is_thread_message() ) {
+				$message = new Message( $content, true );
+			}elseif ( $this->is_message() && !$this->is_thread_message() ) {
+				$message = new Message( $content, false );
+			}
 		}
-		
+
 		private function is_message() {
 			
 		}
-		
+
 		private function is_thread_message() {
 			
 		}
-		
+
 		private function is_task() {
 			
 		}
-		
+
 		private function is_question() {
 			
 		}
+
 	}
 
 }
