@@ -33,7 +33,7 @@ if ( !class_exists( 'Post_Factory' ) ) {
 				$task = new Task( $content );
 			}elseif ( $this->is_question() ) {
 				$task = new Question( $content );
-			}elseif ( $this->is_message() && $this->is_thread_message() ) {
+			}elseif ( $this->is_thread_message() ) {
 				$message = new Message( $content, true );
 			}else {
 				$message = new Message( $content, false );
