@@ -19,22 +19,12 @@ if ( !class_exists( 'Post_Factory' ) ) {
 	 */
 	class Post_Factory {
 
-		private $json_content;
-
-		/**
-		 * Constructor
-		 * @since 0.0.1
-		 */
-		public function __construct( $json_input ) {
-			$this->json_content = $json_input;
-		}
-
 		/**
 		 * Instantiate the appropriate class
 		 * @param array $content JSON of a message converted to an array
 		 * @since 0.0.1
 		 */
-		private function instantiate_classes( $content ) {
+		public function instantiate_classes( $content ) {
 			// Check if the current element is a task
 			if ( $this->is_must_read( $content ) === 'Task' ) {
 				$task = new Task( $content ); // Create new Task
