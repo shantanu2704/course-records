@@ -24,6 +24,8 @@ if ( !class_exists( 'Messages' ) ) {
 		
 		private $broadcast;
 		
+		private $post_id;
+		
 		/**
 		 * Constructor
 		 * @param array $json_input Decoded JSON input array for a message
@@ -47,7 +49,7 @@ if ( !class_exists( 'Messages' ) ) {
 				'comment_status' => 'open',				
 			);
 			// Insert post into database
-			wp_insert_post( $my_post );
+			$this->post_id = wp_insert_post( $my_post );
 		}
 	}
 }
