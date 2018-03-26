@@ -44,8 +44,9 @@ if ( !class_exists( 'Post_Factory' ) ) {
 			
 		}
 
-		private function is_thread_message() {
-			
+		private function is_thread_message( $content ) {
+			$is_thread_message = ( isset( $content[ 'thread_ts' ] ) ) ? TRUE : FALSE;
+			return $is_thread_message;
 		}
 
 		private function is_task( $content ) {
