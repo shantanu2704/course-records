@@ -33,7 +33,7 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 * @param array $post_type JSON of a message converted to an array
 		 * @since 0.0.1
 		 */
-		public function instantiate_classes( $post_type ) {
+		public function instantiate_classes( $post_type, $post_id ) {
 			
 			if ( $post_type === 'Task' ) {
 				$task = new Tasks( $this->content ); // Create new Task
@@ -41,12 +41,12 @@ if ( !class_exists( 'Post_Factory' ) ) {
 			}elseif ( $post_type === 'Question' ) {
 				$question = new Questions( $this->content ); // Create new Question
 				return $question->add_question();
-			}elseif ( $post_type === 'Thread Message' ) {
-				$message = new Messages( $this->content, true, true ); // Create new thread Message		
+			}elseif ( ( $post_type === 'First Thread Message' ) || ( $post_type === 'Message' ) ){
+				$message = new Messages( $this->content ); // Create new thread Message		
 				return $message->add_message();
 			}else {
-				$message = new Messages( $this->content ); // Create new Message
-				return $message->add_message();
+				$message = new Comments( $this->content, $post_id ); // Create new Message
+				return $message->add_comments();
 			}
 		}
 

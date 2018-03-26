@@ -23,6 +23,9 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		public $input_file;
 		public $last_input;
+		private $current_thread_ts;
+		private $previous_thread_ts;
+		private $post_id;
 
 		/**
 		 * Initialise the class
@@ -74,7 +77,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				<form action="" method="POST">
 					<label for="cr_json_file">Select JSON file</label>
 					<select name="cr_json_file" id="cr_json_file">
-			<?php foreach ( $files as $file ) : ?>
+						<?php foreach ( $files as $file ) : ?>
 							<option value="<?php echo esc_attr( $file ); ?>" <?php selected( $file, $this->last_input ) ?>><?php echo esc_html( $file ); ?></option>
 						<?php endforeach; ?>
 					</select>
@@ -110,13 +113,26 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		function process_json() {
 			// Decode the json and get the result as an associative array
-			$json_input = json_decode( $this->input_file, true );
-			$post_factory = new Post_Factory();
-			foreach ( $json_input as $post ) {
-				$post_id = $post_factory->instantiate_classes( $post );
+			$json_input		 = json_decode( $this->input_file, true );
+			$post_factory	 = new Post_Factory();
+			foreach ( $json_input as $content ) {
+				if ( ( $message_type = $this->is_must_read( $content ) ) === false ) {
+					if ( $this->is_beginning_of_thread( $content ) ) {
+						$message_type = 'First Thread Message';
+						$this->current_thread_ts = $content[ 'thread_ts' ];
+					} elseif ( ( $this->is_thread_message( $content ) ) ) {
+						if ( $this->does_message_belong_to_current_thread( $content[ 'thread_ts' ] ) ) {
+							$message_type = 'Comment';
+						}
+					}else{
+						$message_type = 'Message';
+					}
+				}
+				
+				$this->post_id		 = $post_factory->instantiate_classes( $message_type, $this->post_id );
 			}
 		}
-		
+
 		/**
 		 * Check if 'must-read' is used in a message
 		 * @param array $content Decoded JSON message
@@ -125,15 +141,14 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		private function is_must_read( $content ) {
 			$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
-			
 			// Check if must-read appears in the message
 			if ( strpos( $content[ 'text' ], $must_read ) !== false ) {
 				if ( $this->is_question( $content ) ) {
 					return 'Question';
-				} else {
+				}else {
 					return 'Task';
 				}
-			} else {
+			}else {
 				return false;
 			}
 		}
@@ -162,11 +177,24 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			// Check if the string appears in the message
 			if ( strpos( $content[ 'text' ], $saurabh ) !== false ) {
 				return true;
-			} else {
+			}
+			else {
 				return false;
 			}
 		}
+		
+		/**
+		 * Check if the current message is the beginning of a new thread
+		 * @param array $content Decoded JSON message array
+		 * @since 0.0.1
+		 */
+		private function is_beginning_of_thread( $content ) {
+			return array_key_exists( 'replies', $content );
+		}
 
+		private function does_message_belong_to_current_thread( $thread_ts ) {
+			return $thread_ts === $this->current_thread_ts;
+		}
 	}
 
-}
+}	
