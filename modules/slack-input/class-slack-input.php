@@ -113,8 +113,57 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			$json_input = json_decode( $this->input_file, true );
 			$post_factory = new Post_Factory();
 			foreach ( $json_input as $post ) {
-				$is_thread_message = $post_factory->is_thread_message( $post );
 				$post_id = $post_factory->instantiate_classes( $post );
+			}
+		}
+		
+		/**
+		 * Check if 'must-read' is used in a message
+		 * @param array $content Decoded JSON message
+		 * @return boolean|string 
+		 * @since 0.0.1
+		 */
+		private function is_must_read( $content ) {
+			$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
+			
+			// Check if must-read appears in the message
+			if ( strpos( $content[ 'text' ], $must_read ) !== false ) {
+				if ( $this->is_question( $content ) ) {
+					return 'Question';
+				} else {
+					return 'Task';
+				}
+			} else {
+				return false;
+			}
+		}
+
+		/**
+		 * Check if the current message is part of a thread
+		 * @param array $content Decoded JSON message
+		 * @return bool
+		 * @since 0.0.1
+		 */
+		public function is_thread_message( $content ) {
+			// Check if the 'thread_ts' key exists in the json array
+			return array_key_exists( 'thread_ts', $content );
+		}
+
+		/**
+		 * Check if the current message is a question
+		 * @param array $content Decoded JSON message
+		 * @return bool
+		 * @since 0.0.1
+		 */
+		private function is_question( $content ) {
+			// User ID for Saurabh
+			$saurabh = '<U9ATTAU00>';
+
+			// Check if the string appears in the message
+			if ( strpos( $content[ 'text' ], $saurabh ) !== false ) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 
