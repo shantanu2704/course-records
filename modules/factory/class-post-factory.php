@@ -31,7 +31,22 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		private function instantiate_classes( $content ) {
 			
 		}
-
+		
+		private function is_message() {
+			
+		}
+		
+		private function is_thread_message() {
+			
+		}
+		
+		private function is_task() {
+			
+		}
+		
+		private function is_question() {
+			
+		}
 	}
 
 }
