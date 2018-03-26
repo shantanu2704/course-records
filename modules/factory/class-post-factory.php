@@ -18,11 +18,13 @@ if ( !class_exists( 'Post_Factory' ) ) {
 	 */
 	class Post_Factory {
 		
+		public $json_content;
+		
 		/**
 		 * Constructor
 		 */
-		public function __construct() {
-			
+		public function __construct( $json_input ) {
+			$this->json_content = $json_input;
 		}
 	}
 }
