@@ -100,12 +100,17 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				$handle				 = fopen( $file_name, 'r' );
 				// Store the contents of the file in the 'input_file' property
 				$this->input_file	 = fread( $handle, filesize( $file_name ) );
+				// Make the current input as the 'las_input' for the next iteration
 				$this->last_input	 = $_POST[ 'cr_json_file' ];
 			}
 		}
 
+		/**
+		 * Process the json input file
+		 */
 		function process_json() {
-			$json_input = json_decode( $this->input_file );
+			// Decode the json and get the result as an associative array
+			$json_input = json_decode( $this->input_file, true );
 		}
 
 	}
