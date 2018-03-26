@@ -7,7 +7,8 @@
  * @since 0.0.1
  */
 // If this file is called directly, abort.
-if ( !defined( 'ABSPATH' ) ) exit();
+if ( !defined( 'ABSPATH' ) )
+	exit();
 
 if ( !class_exists( 'Post_Factory' ) ) {
 
@@ -36,23 +37,43 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 */
 		private function instantiate_classes( $content ) {
 			// Check if the current element is a task
-			if ( $this->is_task() ) {
-				$task = new Task( $content );
+			if ( $this->is_must_read( $content ) === 'Task' ) {
+				$task = new Task( $content ); // Create new Task
 			}// Or if it is a question
-			elseif ( $this->is_question() ) {
-				$task = new Question( $content );
+			elseif ( $this->is_must_read( $content ) === 'Question' ) {
+				$task = new Question( $content ); // Create new Question
 			}// Or if it is a message in a thread
 			elseif ( $this->is_thread_message() ) {
-				$message = new Message( $content, true, true );
+				$message = new Message( $content, true, true ); // Create new thread Message
 			}// Or is just a regular message
 			else {
-				$message = new Message( $content );
+				$message = new Message( $content ); // Create new Message
+			}
+		}
+
+		/**
+		 * Check if 'must-read' is used in a message
+		 * @param array $content Decoded JSON message
+		 * @return boolean|string 
+		 * @since 0.0.1
+		 */
+		private function is_must_read( $content ) {
+			$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
+			// Check if must-read appears in the message
+			if ( strpos( $content[ 'text' ], $must_read ) !== false ) { // If true
+				if ( $this->is_question( $content ) ) { // Check if the message is a question
+					return 'Question'; // Return the string 'Question' if it is
+				} else {
+					return 'Task'; // else return the string 'Task' if it isn't
+				}
+			} else {
+				return false;
 			}
 		}
 
 		/**
 		 * Check if the current message is part of a thread
-		 * @param array $content
+		 * @param array $content Decoded JSON message
 		 * @return bool
 		 * @since 0.0.1
 		 */
@@ -63,48 +84,18 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		}
 
 		/**
-		 * Check if the current message is a task
-		 * @param array $content
-		 * @return bool
-		 */
-		private function is_task( $content ) {
-			// 'text' contains the message contents
-			if ( isset( $content[ 'text' ] ) ) {
-				$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
-				$channel = '<!channel>'; // User ID for channel
-
-				// Check if both of the strings appear in the message
-				if ( ( strpos( $content[ 'text' ], $must_read ) !== false ) && 
-				     ( strpos( $content[ 'text' ], $channel ) !== false) ) {
-					return true;
-				}else {
-					return false;
-				}
-			} else {
-				return false;
-			}
-		}
-
-		/**
 		 * Check if the current message is a question
-		 * @param array $content
+		 * @param array $content Decoded JSON message
 		 * @return bool
 		 * @since 0.0.1
 		 */
 		private function is_question( $content ) {
-			// 'text' contains the message contents
-			if ( isset( $content[ 'text' ] ) ) {
-				$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
-				$saurabh = '<U9ATTAU00>'; // User ID for Saurabh
-				
-				// Check if both of the strings appear in the message
-				if ( ( strpos( $content[ 'text' ], $must_read ) !== false ) &&
-				     ( strpos( $content[ 'text' ], $saurabh ) !== false) ) {
-					return true;
-				}
-				else {
-					return false;
-				}
+			// User ID for Saurabh
+			$saurabh = '<U9ATTAU00>';
+
+			// Check if the string appears in the message
+			if ( strpos( $content[ 'text' ], $saurabh ) !== false ) {
+				return true;
 			} else {
 				return false;
 			}
