@@ -51,9 +51,9 @@ if ( !class_exists( 'Post_Factory' ) ) {
 
 		private function is_task( $content ) {
 			if ( isset( $content[ 'text' ] ) ) {
-				$query			 = '<@U9DQ94KM3> <!channel>';
-				$return_value	 = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
-				return $return_value;
+				$query	 = '<@U9DQ94KM3> <!channel>';
+				$is_task = ( substr( $content[ 'text' ], 0, strlen( $query ) ) ) === $query ? TRUE : FALSE;
+				return $is_task;
 			}
 		}
 
