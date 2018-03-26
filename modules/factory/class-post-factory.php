@@ -34,9 +34,9 @@ if ( !class_exists( 'Post_Factory' ) ) {
 			}elseif ( $this->is_question() ) {
 				$task = new Question( $content );
 			}elseif ( $this->is_thread_message() ) {
-				$message = new Message( $content, true );
+				$message = new Message( $content, true, true );
 			}else {
-				$message = new Message( $content, false );
+				$message = new Message( $content );
 			}
 		}
 
