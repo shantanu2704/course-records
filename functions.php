@@ -421,3 +421,11 @@ $cr_register->init();
 require get_parent_theme_file_path( '/modules/user-meta/class-user-meta.php' );
 $user_meta = new User_Meta();
 $user_meta->init();
+
+/**
+ * Slack input
+ *
+ */
+require get_parent_theme_file_path( '/modules/slack-input/class-slack-input.php' );
+$slack_input = new Slack_Input();
+$slack_input->init();
