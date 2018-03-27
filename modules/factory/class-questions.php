@@ -30,10 +30,14 @@ if ( !class_exists( 'Questions' ) ) {
 
 		public function add_question() {
 			$ts = (int) $this->content[ 'ts' ] / 1000;
+			$user = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$user = $this->content[ 'user' ];
+			}			
 
 			// Create post object
 			$my_question = array(
-				'post_author'	 => substr( $this->content[ 'text' ], 2, 9 ),
+				'post_author'	 => $user,
 				'post_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',

@@ -35,9 +35,14 @@ if ( !class_exists( 'Comments' ) ) {
 		
 		public function add_comments() {
 			$ts = (int) $this->content[ 'ts' ];
+			$user = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$user = $this->content[ 'user' ];
+			}
+			
 			// Create post object
 			$my_comment = array(
-				'comment_author'	 => substr( $this->content[ 'text' ], 2, 9 ),
+				'comment_author'	 => $user,
 				'comment_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'comment_content'	 => $this->content[ 'text' ],
 				'comment_post_ID'	 => $this->parent_id,
