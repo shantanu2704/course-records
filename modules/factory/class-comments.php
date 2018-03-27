@@ -34,15 +34,23 @@ if ( !class_exists( 'Comments' ) ) {
 		}
 		
 		public function add_comments() {
+			$ts = (int) $this->content[ 'ts' ];
 			// Create post object
 			$my_comment = array(
-				'comment_author' => $this->content[ 'name' ],
-				'comment_date' => substr($this->content[ 'datetime' ], 0, 10 ),
-				'comment_content' => $this->content[ 'text' ],
-				'comment_post_ID' => $this->parent_id,
-				);
+				'comment_author'	 => substr( $this->content[ 'text' ], 2, 9 ),
+				'comment_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
+				'comment_content'	 => $this->content[ 'text' ],
+				'comment_post_ID'	 => $this->parent_id,
+			);
 			// Insert post into database
-			return wp_insert_comment( $my_comment );
+			$comment_id =  wp_insert_comment( $my_comment );
+			$this->add_comment_meta( $comment_id );
+		}
+		
+		public function add_comment_meta( $comment_id ) {
+			foreach ( $this->content as $key => $value ) {
+				add_comment_meta( $comment_id, 'cr_' . $key, $value);
+			}
 		}
 	}
 }

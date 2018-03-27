@@ -48,11 +48,12 @@ if ( !class_exists( 'Post_Factory' ) ) {
 				$question = new Questions( $content ); // Create new Question
 				return $question->add_question();
 			}elseif ( ( $post_type === 'First Thread Message' ) || ( $post_type === 'Message' ) ){
-				$message = new Messages( $content ); // Create new thread Message		
+				$message = new Messages( $content ); // Create new Message		
 				return $message->add_message();
-			}else {
-				$message = new Comments( $content, $post_id ); // Create new Message
-				return $message->add_comments();
+			}elseif ( $post_type === 'Comment' ) {
+				$message = new Comments( $content, $post_id ); // Create new comment
+				$message->add_comments();
+				return $post_id;
 			}
 		}
 

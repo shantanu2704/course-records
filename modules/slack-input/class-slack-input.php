@@ -6,8 +6,7 @@
  * @since 0.0.1
  */
 // If this file is called directly, abort.
-if ( !defined( 'ABSPATH' ) )
-	exit();
+if ( !defined( 'ABSPATH' ) ) exit();
 
 if ( !class_exists( 'Slack_Input' ) ) {
 
@@ -114,57 +113,56 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		function process_json() {
 			// Decode the json and get the result as an associative array
 			$json_input		 = json_decode( $this->input_file, true );
-			if ( empty( $json_input ) )
+			if ( empty( $json_input ) ) {
 				return;
+			}
 			require get_parent_theme_file_path( '/modules/factory/class-post-factory.php' );
 			$post_factory	 = new Post_Factory();
 			foreach ( $json_input as $content ) {
-				if ( ( $message_type = $this->is_must_read( $content ) ) === false ) {
-					if ( $this->is_beginning_of_thread( $content ) ) {
-						$message_type = 'First Thread Message';
-						$this->current_thread_ts = $content[ 'thread_ts' ];
-					} elseif ( ( $this->is_thread_message( $content ) ) ) {
-						if ( $this->does_message_belong_to_current_thread( $content[ 'thread_ts' ] ) ) {
-							$message_type = 'Comment';
-						}
-					}else{
-						$message_type = 'Message';
-					}
+				
+				if ( $this->is_comment( $content ) ){
+					$message_type = 'Comment';
+					$post_id = $this->get_main_post_id( $content );
+					$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type, $post_id );
+					continue;
 				}
 				
-				$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type, $this->post_id );
+				$message_type = $this->check_message_subtype( $content );
+				$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type );
 			}
+		}
+		
+		/**
+		 * Check if the current element is a comment
+		 * @param array $content Decoded JSON message
+		 * @return bool
+		 * @since 0.0.1
+		 */
+		private function is_comment( $content ) {
+			if ( array_key_exists( 'subtype', $content ) && ( "thread_broadcast" === $content['subtype'] ) ) {
+				return true;
+			}
+			return array_key_exists( 'parent_user_id', $content );
 		}
 
 		/**
-		 * Check if 'must-read' is used in a message
+		 * Check the subtype of the message based on the presence of must-read
 		 * @param array $content Decoded JSON message
 		 * @return boolean|string 
 		 * @since 0.0.1
 		 */
-		private function is_must_read( $content ) {
+		private function check_message_subtype( $content ) {
 			$must_read = '<@U9DQ94KM3>'; // Bot ID for must-read
 			// Check if must-read appears in the message
 			if ( strpos( $content[ 'text' ], $must_read ) !== false ) {
-				if ( $this->is_question( $content ) ) {
+				if ( true === $this->is_question( $content ) ) {
 					return 'Question';
 				}else {
 					return 'Task';
 				}
 			}else {
-				return false;
+				return 'Message';
 			}
-		}
-
-		/**
-		 * Check if the current message is part of a thread
-		 * @param array $content Decoded JSON message
-		 * @return bool
-		 * @since 0.0.1
-		 */
-		public function is_thread_message( $content ) {
-			// Check if the 'thread_ts' key exists in the json array
-			return array_key_exists( 'thread_ts', $content );
 		}
 
 		/**
@@ -175,7 +173,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 */
 		private function is_question( $content ) {
 			// User ID for Saurabh
-			$saurabh = '<U9ATTAU00>';
+			$saurabh = 'U9ATTAU00';
 
 			// Check if the string appears in the message
 			if ( strpos( $content[ 'text' ], $saurabh ) !== false ) {
@@ -187,16 +185,29 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		}
 		
 		/**
-		 * Check if the current message is the beginning of a new thread
-		 * @param array $content Decoded JSON message array
+		 * Get the ID of the parent post
+		 * @param string $value Timestamp
+		 * @return string
 		 * @since 0.0.1
 		 */
-		private function is_beginning_of_thread( $content ) {
-			return array_key_exists( 'replies', $content );
-		}
-
-		private function does_message_belong_to_current_thread( $thread_ts ) {
-			return $thread_ts === $this->current_thread_ts;
+		private function get_main_post_id( $value ) {
+			
+			$args = array(
+				'post_type' => array( 'message', 'task', 'question' ),
+				'meta_query' => array(
+					array(
+						'key' => 'cr_thread_ts',
+						'value' => $value[ 'thread_ts' ],
+						'compare' => 'CHAR',
+						)
+				),
+				
+			);
+			$query = new WP_Query( $args );
+			
+			if ( $query->have_posts() ) {
+				return $query->post->ID;
+			}
 		}
 	}
 

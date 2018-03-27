@@ -29,19 +29,26 @@ if ( !class_exists( 'Tasks' ) ) {
 		}
 
 		public function add_task() {
+			$ts = (int) $this->content[ 'ts' ];
 			// Create post object
-			$my_post = array(
-				'post_author'	 => $this->content[ 'name' ],
-				'post_date'		 => substr( $this->content[ 'datetime' ], 0, 10 ),
+			$my_task = array(
+				'post_author'	 => substr( $this->content[ 'text' ], 2, 9 ),
+				'post_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
 				'post_type'		 => 'task',
 				'comment_status' => 'open',
 			);
 			// Insert post into database
-			return wp_insert_post( $my_post );
+			$task_id =  wp_insert_post( $my_task );
+			$this->add_question_meta( $task_id );
 		}
-
+		
+		public function add_question_meta( $task_id ) {
+			foreach ( $this->content as $key => $value ) {
+				add_post_meta( $task_id, 'cr_' . $key, $value);
+			}
+		}
 	}
 
 }

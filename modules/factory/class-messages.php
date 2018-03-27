@@ -37,17 +37,25 @@ if ( !class_exists( 'Messages' ) ) {
 		}
 		
 		public function add_message() {
+			$ts = (int) $this->content[ 'ts' ];
 			// Create post object
-			$my_post = array(
-				// 'post_author' => $this->content[ 'user' ],
-				'post_date' => substr($this->content[ 'datetime' ], 0, 10 ),
-				'post_content' => $this->content[ 'text' ],
-				'post_status' => 'publish',
-				'post_type' => 'message',
-				'comment_status' => 'open',				
+			$my_message = array(
+				'post_author'	 => substr( $this->content[ 'text' ], 2, 9 ),
+				'post_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
+				'post_content'	 => $this->content[ 'text' ],
+				'post_status'	 => 'publish',
+				'post_type'		 => 'message',
+				'comment_status' => 'open',
 			);
 			// Insert post into database
-			return wp_insert_post( $my_post );
+			$message_id =  wp_insert_post( $my_message );
+			$this->add_message_meta( $message_id );
+		}
+		
+		public function add_message_meta( $message_id ) {
+			foreach ( $this->content as $key => $value ) {
+				add_post_meta( $message_id, 'cr_' . $key, $value);
+			}
 		}
 	}
 }
