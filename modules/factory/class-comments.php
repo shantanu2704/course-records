@@ -33,7 +33,7 @@ if ( !class_exists( 'Comments' ) ) {
 			$this->parent_id = $parent_post_id;
 		}
 		
-		public function add_comment() {
+		public function add_comments() {
 			// Create post object
 			$my_comment = array(
 				'comment_author' => $this->content[ 'name' ],

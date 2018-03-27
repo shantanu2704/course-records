@@ -114,6 +114,9 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		function process_json() {
 			// Decode the json and get the result as an associative array
 			$json_input		 = json_decode( $this->input_file, true );
+			if ( empty( $json_input ) )
+				return;
+			require get_parent_theme_file_path( '/modules/factory/class-post-factory.php' );
 			$post_factory	 = new Post_Factory();
 			foreach ( $json_input as $content ) {
 				if ( ( $message_type = $this->is_must_read( $content ) ) === false ) {
@@ -129,7 +132,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 					}
 				}
 				
-				$this->post_id		 = $post_factory->instantiate_classes( $message_type, $this->post_id );
+				$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type, $this->post_id );
 			}
 		}
 

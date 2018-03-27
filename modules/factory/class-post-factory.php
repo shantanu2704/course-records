@@ -24,8 +24,9 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 * Constructor
 		 * @param array $json_content Decoded json data
 		 */
-		public function __construct( $json_content ) {
-			$this->content = $json_content;
+		public function __construct( ) {
+//			$this->content = array();
+//			$this->content = $json_content;
 		}
 
 		/**
@@ -33,19 +34,24 @@ if ( !class_exists( 'Post_Factory' ) ) {
 		 * @param array $post_type JSON of a message converted to an array
 		 * @since 0.0.1
 		 */
-		public function instantiate_classes( $post_type, $post_id ) {
+		public function instantiate_classes( $content, $post_type, $post_id = 0 ) {
+			require get_parent_theme_file_path( '/modules/factory/class-tasks.php' );
+			require get_parent_theme_file_path( '/modules/factory/class-questions.php' );
+			require get_parent_theme_file_path( '/modules/factory/class-messages.php' );
+			require get_parent_theme_file_path( '/modules/factory/class-comments.php' );
 			
+
 			if ( $post_type === 'Task' ) {
-				$task = new Tasks( $this->content ); // Create new Task
+				$task = new Tasks( $content ); // Create new Task
 				return $task->add_task();
 			}elseif ( $post_type === 'Question' ) {
-				$question = new Questions( $this->content ); // Create new Question
+				$question = new Questions( $content ); // Create new Question
 				return $question->add_question();
 			}elseif ( ( $post_type === 'First Thread Message' ) || ( $post_type === 'Message' ) ){
-				$message = new Messages( $this->content ); // Create new thread Message		
+				$message = new Messages( $content ); // Create new thread Message		
 				return $message->add_message();
 			}else {
-				$message = new Comments( $this->content, $post_id ); // Create new Message
+				$message = new Comments( $content, $post_id ); // Create new Message
 				return $message->add_comments();
 			}
 		}

@@ -39,7 +39,7 @@ if ( !class_exists( 'Messages' ) ) {
 		public function add_message() {
 			// Create post object
 			$my_post = array(
-				'post_author' => $this->content[ 'name' ],
+				// 'post_author' => $this->content[ 'user' ],
 				'post_date' => substr($this->content[ 'datetime' ], 0, 10 ),
 				'post_content' => $this->content[ 'text' ],
 				'post_status' => 'publish',
