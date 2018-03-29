@@ -35,14 +35,10 @@ if ( !class_exists( 'Comments' ) ) {
 		
 		public function add_comments() {
 			$ts = (int) $this->content[ 'ts' ];
-			$user = '';
-			if ( array_key_exists( 'user', $this->content ) ) {
-				$user = $this->content[ 'user' ];
-			}
 			
 			// Create post object
 			$my_comment = array(
-				'comment_author'	 => $user,
+				'comment_author'	 => $this->get_username_from_slack_id(),
 				'comment_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'comment_content'	 => $this->content[ 'text' ],
 				'comment_post_ID'	 => $this->parent_id,
@@ -62,7 +58,7 @@ if ( !class_exists( 'Comments' ) ) {
 			$args = array(
 				'meta_key'	 => 'slack_username',
 				'meta_value' => $this->content[ 'user' ],
-				'fields'	 => 'ID'
+				'fields'	 => 'display_name'
 			);
 			$user = get_users( $args );
 			return $user[ 0 ];
