@@ -41,13 +41,14 @@ if ( !class_exists( 'Messages' ) ) {
 			
 			// Create post object
 			$my_message = array(
-				'ID'	 => $this->get_username_from_slack_id(),
+				'post_author'	 => $this->get_username_from_slack_id(),
 				'post_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
 				'post_type'		 => 'message',
 				'comment_status' => 'open',
 			);
+
 			// Insert post into database
 			$message_id =  wp_insert_post( $my_message );
 			$this->add_message_meta( $message_id );
@@ -60,13 +61,19 @@ if ( !class_exists( 'Messages' ) ) {
 		}
 		
 		private function get_username_from_slack_id() {
-			$args = array(
-				'meta_key'	 => 'slack_username',
-				'meta_value' => $this->content[ 'user' ],
-				'fields'	 => 'ID'
-			);
-			$user = get_users( $args );
-			return $user[ 0 ];
+			$return_value = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$args	 = array(
+					'meta_key'	 => 'slack_username',
+					'meta_value' => $this->content[ 'user' ],
+					'fields'	 => 'ID'
+				);
+				$user	 = get_users( $args );
+				if ( isset($user[ 0 ] ) ) {
+					$return_value = ( int ) $user[ 0 ];
+				}
+			}
+			return $return_value;
 		}
 
 	}

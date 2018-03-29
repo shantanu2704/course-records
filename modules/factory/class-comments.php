@@ -55,13 +55,20 @@ if ( !class_exists( 'Comments' ) ) {
 		}
 		
 		private function get_username_from_slack_id() {
-			$args = array(
-				'meta_key'	 => 'slack_username',
-				'meta_value' => $this->content[ 'user' ],
-				'fields'	 => 'display_name'
-			);
-			$user = get_users( $args );
-			return $user[ 0 ];
+			$return_value = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$args	 = array(
+					'meta_key'	 => 'slack_username',
+					'meta_value' => $this->content[ 'user' ],
+					'fields'	 => array( 'display_name' )
+				);
+				$user	 = get_users( $args );
+
+				if ( isset($user[ 0 ] ) ) {
+					$return_value = $user[ 0 ]->display_name;
+				}
+			}
+			return $return_value;
 		}
 
 	}
