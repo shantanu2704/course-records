@@ -33,7 +33,7 @@ if ( !class_exists( 'Questions' ) ) {
 
 			// Create post object
 			$my_question = array(
-				'ID'	 => $this->get_username_from_slack_id(),
+				'ID'			 => $this->get_username_from_slack_id(),
 				'post_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
