@@ -38,14 +38,10 @@ if ( !class_exists( 'Messages' ) ) {
 		
 		public function add_message() {
 			$ts = (int) $this->content[ 'ts' ];
-			$user = '';
-			if ( array_key_exists( 'user', $this->content ) ) {
-				$user = $this->content[ 'user' ];
-			}
 			
 			// Create post object
 			$my_message = array(
-				'post_author'	 => $user,
+				'ID'	 => $this->get_username_from_slack_id(),
 				'post_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
