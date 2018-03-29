@@ -54,6 +54,16 @@ if ( !class_exists( 'Tasks' ) ) {
 				add_post_meta( $task_id, 'cr_' . $key, $value);
 			}
 		}
+		
+		private function get_username_from_slack_id() {
+			$args = array(
+				'meta_key'	 => 'slack_username',
+				'meta_value' => $this->content[ 'user' ],
+				'fields'	 => 'ID'
+			);
+			$user = get_users( $args );
+			return $user[ 0 ];
+		}
 	}
 
 }
