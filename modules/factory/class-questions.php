@@ -30,14 +30,10 @@ if ( !class_exists( 'Questions' ) ) {
 
 		public function add_question() {
 			$ts = (int) $this->content[ 'ts' ] / 1000;
-			$user = '';
-			if ( array_key_exists( 'user', $this->content ) ) {
-				$user = $this->content[ 'user' ];
-			}			
 
 			// Create post object
 			$my_question = array(
-				'post_author'	 => $user,
+				'ID'	 => $this->get_username_from_slack_id(),
 				'post_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
