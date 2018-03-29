@@ -72,5 +72,7 @@ if ( !class_exists( 'Messages' ) ) {
 			$user = get_users( $args );
 			return $user[ 0 ];
 		}
+
 	}
+
 }

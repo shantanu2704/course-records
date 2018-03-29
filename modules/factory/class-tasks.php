@@ -64,6 +64,7 @@ if ( !class_exists( 'Tasks' ) ) {
 			$user = get_users( $args );
 			return $user[ 0 ];
 		}
+		
 	}
 
 }
