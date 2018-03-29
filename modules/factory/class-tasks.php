@@ -37,7 +37,7 @@ if ( !class_exists( 'Tasks' ) ) {
 			
 			// Create post object
 			$my_task = array(
-				'post_author'	 => $user,
+				'ID'			 => $this->get_username_from_slack_id(),
 				'post_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',

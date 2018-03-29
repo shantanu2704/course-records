@@ -37,7 +37,7 @@ if ( !class_exists( 'Comments' ) ) {
 			$ts = (int) $this->content[ 'ts' ];
 			
 			// Create post object
-			$my_comment = array(
+			$my_comment	 = array(
 				'comment_author'	 => $this->get_username_from_slack_id(),
 				'comment_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'comment_content'	 => $this->content[ 'text' ],
