@@ -41,7 +41,7 @@ if ( !class_exists( 'Comments' ) ) {
 			// Create post object
 			$my_comment	 = array(
 			//	'comment_author'	 => $user[ 0 ]->display_name,
-				'comment_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
+				'comment_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'comment_content'	 => $this->content[ 'text' ],
 				'comment_post_ID'	 => $this->parent_id,
 				'user_id'			 => $user[ 0 ]->ID

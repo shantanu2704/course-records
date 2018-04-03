@@ -29,7 +29,7 @@ if ( !class_exists( 'Questions' ) ) {
 		}
 
 		public function add_question() {
-			$ts = (int) $this->content[ 'ts' ] / 1000;
+			$ts = (int) $this->content[ 'ts' ];
 
 			// Create post object
 			$my_question = array(

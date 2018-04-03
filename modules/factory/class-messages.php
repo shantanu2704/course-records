@@ -42,7 +42,7 @@ if ( !class_exists( 'Messages' ) ) {
 			// Create post object
 			$my_message = array(
 				'post_author'	 => $this->get_username_from_slack_id(),
-				'post_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
+				'post_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
 				'post_type'		 => 'message',
