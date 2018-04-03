@@ -36,12 +36,15 @@ if ( !class_exists( 'Comments' ) ) {
 		public function add_comments() {
 			$ts = (int) $this->content[ 'ts' ];
 			
+			$user = $this->get_username_from_slack_id();
+			
 			// Create post object
 			$my_comment	 = array(
-				'comment_author'	 => $this->get_username_from_slack_id(),
+			//	'comment_author'	 => $user[ 0 ]->display_name,
 				'comment_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
 				'comment_content'	 => $this->content[ 'text' ],
 				'comment_post_ID'	 => $this->parent_id,
+				'user_id'			 => $user[ 0 ]->ID
 			);
 			// Insert post into database
 			$comment_id =  wp_insert_comment( $my_comment );
@@ -60,13 +63,9 @@ if ( !class_exists( 'Comments' ) ) {
 				$args	 = array(
 					'meta_key'	 => 'slack_username',
 					'meta_value' => $this->content[ 'user' ],
-					'fields'	 => array( 'display_name' )
+					'fields'	 => array( 'display_name', 'ID' )
 				);
-				$user	 = get_users( $args );
-
-				if ( isset($user[ 0 ] ) ) {
-					$return_value = $user[ 0 ]->display_name;
-				}
+				$return_value	 = get_users( $args );
 			}
 			return $return_value;
 		}
