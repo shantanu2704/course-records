@@ -49,6 +49,9 @@
 
 	<div class="entry-content">
 		<?php
+
+			echo get_avatar( get_the_author_meta( 'ID' ) , 32 );
+			the_author();
 			/* translators: %s: Name of current post */
 			the_content( sprintf(
 				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
