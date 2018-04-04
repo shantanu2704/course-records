@@ -34,7 +34,7 @@ get_header();
 					 ?>">
 						 <?php
 						 foreach ( $reactions[ 0 ] as $reaction ) {
-							 echo $reaction[ 'name' ] . " : " . $reaction[ 'count' ] . "\n";
+							 echo ":" . $reaction[ 'name' ] .":"  . " - " . $reaction[ 'count' ] . "\n";
 						 }
 						 ?>
 				</div>
