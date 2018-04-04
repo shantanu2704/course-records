@@ -21,8 +21,20 @@ get_header(); ?>
 				while ( have_posts() ) : the_post();
 
 					get_template_part( 'components/post/content', 'task' );
-
-					// If comments are open or we have at least one comment, load up the comment template.
+					
+					$reactions = get_post_meta( get_the_ID(), 'cr_reactions' );
+					?>
+			<div class="reactions" data-reactions="<?php  foreach ( $reactions[ 0 ][ 0 ][ 'users' ] as $value ) {
+							echo $value . "\n";	   
+						   }
+						   ?>">
+					<?php echo $reactions[ 0 ][ 0 ][ 'name' ];
+						   echo " : ";
+						   echo $reactions[ 0 ][ 0 ][ 'count' ];
+					?>
+			</div>
+			<?php
+	// If comments are open or we have at least one comment, load up the comment template.
 					if ( comments_open() || get_comments_number() ) :
 						comments_template();
 					endif;
