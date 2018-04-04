@@ -8,11 +8,10 @@
  * @subpackage Twenty_Seventeen
  * @since 1.0
  */
-
 /**
  * Twenty Seventeen only works in WordPress 4.7 or later.
  */
-if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
+if ( version_compare( $GLOBALS[ 'wp_version' ], '4.7-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 	return;
 }
@@ -57,7 +56,7 @@ function twentyseventeen_setup() {
 
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
-		'top'    => __( 'Top', 'twentyseventeen' ),
+		'top'	 => __( 'Top', 'twentyseventeen' ),
 		'social' => __( 'Social Links Menu', 'twentyseventeen' ),
 	) );
 
@@ -89,17 +88,18 @@ function twentyseventeen_setup() {
 
 	// Add theme support for Custom Logo.
 	add_theme_support( 'custom-logo', array(
-		'width'       => 250,
-		'height'      => 250,
-		'flex-width'  => true,
+		'width'		 => 250,
+		'height'	 => 250,
+		'flex-width' => true,
 	) );
 
 	/*
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, and column width.
- 	 */
+	 */
 	add_editor_style( array( 'assets/css/editor-style.css', twentyseventeen_fonts_url() ) );
 }
+
 add_action( 'after_setup_theme', 'twentyseventeen_setup' );
 
 /**
@@ -117,8 +117,9 @@ function twentyseventeen_content_width() {
 		$content_width = 1120;
 	}
 
-	$GLOBALS['content_width'] = apply_filters( 'twentyseventeen_content_width', $content_width );
+	$GLOBALS[ 'content_width' ] = apply_filters( 'twentyseventeen_content_width', $content_width );
 }
+
 add_action( 'after_setup_theme', 'twentyseventeen_content_width', 0 );
 
 /**
@@ -159,7 +160,8 @@ function twentyseventeen_fonts_url() {
  * @param string $relation_type  The relation type the URLs are printed.
  * @return array $urls           URLs to print for resource hints.
  */
-function twentyseventeen_resource_hints( $urls, $relation_type ) {
+function twentyseventeen_resource_hints( $urls,
+										 $relation_type ) {
 	if ( wp_style_is( 'twentyseventeen-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
 		$urls[] = array(
 			'href' => 'https://fonts.gstatic.com',
@@ -169,6 +171,7 @@ function twentyseventeen_resource_hints( $urls, $relation_type ) {
 
 	return $urls;
 }
+
 add_filter( 'wp_resource_hints', 'twentyseventeen_resource_hints', 10, 2 );
 
 /**
@@ -178,35 +181,36 @@ add_filter( 'wp_resource_hints', 'twentyseventeen_resource_hints', 10, 2 );
  */
 function twentyseventeen_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'twentyseventeen' ),
-		'id'            => 'sidebar-1',
-		'description'   => __( 'Add widgets here to appear in your sidebar.', 'twentyseventeen' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'name'			 => __( 'Sidebar', 'twentyseventeen' ),
+		'id'			 => 'sidebar-1',
+		'description'	 => __( 'Add widgets here to appear in your sidebar.', 'twentyseventeen' ),
+		'before_widget'	 => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'	 => '</section>',
+		'before_title'	 => '<h2 class="widget-title">',
+		'after_title'	 => '</h2>',
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Footer 1', 'twentyseventeen' ),
-		'id'            => 'sidebar-2',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'twentyseventeen' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'name'			 => __( 'Footer 1', 'twentyseventeen' ),
+		'id'			 => 'sidebar-2',
+		'description'	 => __( 'Add widgets here to appear in your footer.', 'twentyseventeen' ),
+		'before_widget'	 => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'	 => '</section>',
+		'before_title'	 => '<h2 class="widget-title">',
+		'after_title'	 => '</h2>',
 	) );
 
 	register_sidebar( array(
-		'name'          => __( 'Footer 2', 'twentyseventeen' ),
-		'id'            => 'sidebar-3',
-		'description'   => __( 'Add widgets here to appear in your footer.', 'twentyseventeen' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'name'			 => __( 'Footer 2', 'twentyseventeen' ),
+		'id'			 => 'sidebar-3',
+		'description'	 => __( 'Add widgets here to appear in your footer.', 'twentyseventeen' ),
+		'before_widget'	 => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'	 => '</section>',
+		'before_title'	 => '<h2 class="widget-title">',
+		'after_title'	 => '</h2>',
 	) );
 }
+
 add_action( 'widgets_init', 'twentyseventeen_widgets_init' );
 
 /**
@@ -220,13 +224,12 @@ add_action( 'widgets_init', 'twentyseventeen_widgets_init' );
  * @return string 'Continue reading' link prepended with an ellipsis.
  */
 function twentyseventeen_excerpt_more() {
-	$link = sprintf( '<p class="link-more"><a href="%1$s" class="more-link">%2$s</a></p>',
-		esc_url( get_permalink( get_the_ID() ) ),
-		/* translators: %s: Name of current post */
-		sprintf( __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ), get_the_title( get_the_ID() ) )
+	$link = sprintf( '<p class="link-more"><a href="%1$s" class="more-link">%2$s</a></p>', esc_url( get_permalink( get_the_ID() ) ),
+	/* translators: %s: Name of current post */ sprintf( __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ), get_the_title( get_the_ID() ) )
 	);
 	return ' &hellip; ' . $link;
 }
+
 add_filter( 'excerpt_more', 'twentyseventeen_excerpt_more' );
 
 /**
@@ -239,6 +242,7 @@ add_filter( 'excerpt_more', 'twentyseventeen_excerpt_more' );
 function twentyseventeen_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
+
 add_action( 'wp_head', 'twentyseventeen_javascript_detection', 0 );
 
 /**
@@ -249,23 +253,28 @@ function twentyseventeen_pingback_header() {
 		printf( '<link rel="pingback" href="%s">' . "\n", get_bloginfo( 'pingback_url' ) );
 	}
 }
+
 add_action( 'wp_head', 'twentyseventeen_pingback_header' );
 
 /**
  * Display custom color CSS.
  */
 function twentyseventeen_colors_css_wrap() {
-	if ( 'custom' !== get_theme_mod( 'colorscheme' ) && ! is_customize_preview() ) {
+	if ( 'custom' !== get_theme_mod( 'colorscheme' ) && !is_customize_preview() ) {
 		return;
 	}
 
 	require_once( get_parent_theme_file_path( '/inc/color-patterns.php' ) );
 	$hue = absint( get_theme_mod( 'colorscheme_hue', 250 ) );
-?>
-	<style type="text/css" id="custom-theme-colors" <?php if ( is_customize_preview() ) { echo 'data-hue="' . $hue . '"'; } ?>>
-		<?php echo twentyseventeen_custom_colors_css(); ?>
+	?>
+	<style type="text/css" id="custom-theme-colors" <?php if ( is_customize_preview() ) {
+		echo 'data-hue="' . $hue . '"';
+	} ?>>
+	<?php echo twentyseventeen_custom_colors_css(); ?>
 	</style>
-<?php }
+<?php
+}
+
 add_action( 'wp_head', 'twentyseventeen_colors_css_wrap' );
 
 /**
@@ -294,16 +303,16 @@ function twentyseventeen_scripts() {
 	wp_enqueue_script( 'twentyseventeen-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
 
 	$twentyseventeen_l10n = array(
-		'quote'          => twentyseventeen_get_svg( array( 'icon' => 'quote-right' ) ),
+		'quote'			 => twentyseventeen_get_svg( array( 'icon' => 'quote-right' ) ),
 		'has_navigation' => 'false',
 	);
 
 	if ( has_nav_menu( 'top' ) ) {
 		wp_enqueue_script( 'twentyseventeen-navigation', get_theme_file_uri( '/assets/js/navigation.js' ), array(), '1.0', true );
-		$twentyseventeen_l10n['has_navigation'] = 'true';
-		$twentyseventeen_l10n['expand']         = __( 'Expand child menu', 'twentyseventeen' );
-		$twentyseventeen_l10n['collapse']       = __( 'Collapse child menu', 'twentyseventeen' );
-		$twentyseventeen_l10n['icon']           = twentyseventeen_get_svg( array( 'icon' => 'expand', 'fallback' => true ) );
+		$twentyseventeen_l10n[ 'has_navigation' ]	 = 'true';
+		$twentyseventeen_l10n[ 'expand' ]			 = __( 'Expand child menu', 'twentyseventeen' );
+		$twentyseventeen_l10n[ 'collapse' ]		 = __( 'Collapse child menu', 'twentyseventeen' );
+		$twentyseventeen_l10n[ 'icon' ]			 = twentyseventeen_get_svg( array( 'icon' => 'expand', 'fallback' => true ) );
 	}
 
 	wp_enqueue_script( 'twentyseventeen-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '1.0', true );
@@ -319,6 +328,7 @@ function twentyseventeen_scripts() {
 		wp_enqueue_script( 'jquery-scrollto', get_template_directory_uri() . '/assets/js/jquery.scrollTo.js', array( 'jquery' ), '2.1.2', true );
 	}
 }
+
 add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
 
 /**
@@ -332,19 +342,21 @@ add_action( 'wp_enqueue_scripts', 'twentyseventeen_scripts' );
  *                      values in pixels (in that order).
  * @return string A source size value for use in a content image 'sizes' attribute.
  */
-function twentyseventeen_content_image_sizes_attr( $sizes, $size ) {
-	$width = $size[0];
+function twentyseventeen_content_image_sizes_attr( $sizes,
+												   $size ) {
+	$width = $size[ 0 ];
 
 	740 <= $width && $sizes = '(max-width: 706px) 89vw, (max-width: 767px) 82vw, 740px';
 
 	if ( is_active_sidebar( 'sidebar-1' ) || is_archive() || is_search() || is_home() || is_page() ) {
-		if ( ! ( is_page() && 'one-column' === get_theme_mod( 'page_options' ) ) ) {
+		if ( !( is_page() && 'one-column' === get_theme_mod( 'page_options' ) ) ) {
 			767 <= $width && $sizes = '(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px';
 		}
 	}
 
 	return $sizes;
 }
+
 add_filter( 'wp_calculate_image_sizes', 'twentyseventeen_content_image_sizes_attr', 10, 2 );
 
 /**
@@ -358,15 +370,18 @@ add_filter( 'wp_calculate_image_sizes', 'twentyseventeen_content_image_sizes_att
  * @param array $size       Registered image size or flat array of height and width dimensions.
  * @return string A source size value for use in a post thumbnail 'sizes' attribute.
  */
-function twentyseventeen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
+function twentyseventeen_post_thumbnail_sizes_attr( $attr,
+													$attachment, $size ) {
 	if ( is_archive() || is_search() || is_home() ) {
-		$attr['sizes'] = '(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px';
-	} else {
-		$attr['sizes'] = '100vw';
+		$attr[ 'sizes' ] = '(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px';
+	}
+	else {
+		$attr[ 'sizes' ] = '100vw';
 	}
 
 	return $attr;
 }
+
 add_filter( 'wp_get_attachment_image_attributes', 'twentyseventeen_post_thumbnail_sizes_attr', 10, 3 );
 
 /**
@@ -381,7 +396,8 @@ add_filter( 'wp_get_attachment_image_attributes', 'twentyseventeen_post_thumbnai
 function twentyseventeen_front_page_template( $template ) {
 	return is_home() ? '' : $template;
 }
-add_filter( 'frontpage_template',  'twentyseventeen_front_page_template' );
+
+add_filter( 'frontpage_template', 'twentyseventeen_front_page_template' );
 
 /**
  * Implement the Custom Header feature.
@@ -415,7 +431,7 @@ require get_parent_theme_file_path( '/modules/custom-types/class-register-custom
 $cr_register = new Register_Custom_Types();
 $cr_register->init();
 
-/**	
+/** 	
  * User meta.
  */
 require get_parent_theme_file_path( '/modules/user-meta/class-user-meta.php' );
@@ -428,3 +444,20 @@ $user_meta->init();
 require get_parent_theme_file_path( '/modules/slack-input/class-slack-input.php' );
 $slack_input = new Slack_Input();
 $slack_input->init();
+
+/**
+ * Modify the supported post types in the default WP Query
+ */
+function cr_query_vars( $qvars ) {
+	$cr_custom_post_types	 = array( 'message', 'question', 'report', 'task' );
+	$cr_supported_post_types = apply_filters( 'cr_modify_custom_post_types', $cr_custom_post_types );
+
+	if ( !array_key_exists( 'post_type', $qvars ) ) {
+		$qvars[ 'post_type' ] = array();
+		$qvars[ 'post_type' ] = array_merge( $qvars[ 'post_type' ], $cr_supported_post_types );
+	}
+	
+	return $qvars;
+}
+
+add_filter( 'request', 'cr_query_vars' );

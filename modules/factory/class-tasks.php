@@ -37,8 +37,8 @@ if ( !class_exists( 'Tasks' ) ) {
 			
 			// Create post object
 			$my_task = array(
-				'post_author'	 => $user,
-				'post_date'		 => date( "Y-m-d H:i:s", $ts / 1000 ),
+				'post_author'	 => $this->get_username_from_slack_id(),
+				'post_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
 				'post_type'		 => 'task',
@@ -54,6 +54,23 @@ if ( !class_exists( 'Tasks' ) ) {
 				add_post_meta( $task_id, 'cr_' . $key, $value);
 			}
 		}
+		
+		private function get_username_from_slack_id() {
+			$return_value = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$args	 = array(
+					'meta_key'	 => 'slack_username',
+					'meta_value' => $this->content[ 'user' ],
+					'fields'	 => 'ID'
+				);
+				$user	 = get_users( $args );
+				if ( isset($user[ 0 ] ) ) {
+					$return_value = ( int ) $user[ 0 ];
+				}
+			}
+			return $return_value;
+		}
+		
 	}
 
 }
