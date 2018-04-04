@@ -26,15 +26,21 @@ get_header();
 				?>
 				<div class="reactions" data-reactions="
 					 <?php
-					 foreach ( $reactions[ 0 ] as $reaction ) {
-						 foreach ( $reaction[ 'users' ] as $user ) {
-							 echo $user . "\n";
-						 }
+					 if ( isset($reactions[ 0 ] ) ) {
+						foreach ( $reactions[ 0 ] as $reaction ) {
+							if ( isset($reaction[ 'users' ] ) ) {
+								foreach ( $reaction[ 'users' ] as $user ) {
+									echo $user . "\n";
+								}
+							}
+						}
 					 }
 					 ?>">
 						 <?php
-						 foreach ( $reactions[ 0 ] as $reaction ) {
-							 echo ":" . $reaction[ 'name' ] .":"  . " - " . $reaction[ 'count' ] . "\n";
+						if ( isset($reactions[ 0 ] ) ) {
+							foreach ( $reactions[ 0 ] as $reaction ) {
+								echo $reaction[ 'name' ] . " : " . $reaction[ 'count' ] . "\n";
+							}
 						 }
 						 ?>
 				</div>
