@@ -30,6 +30,14 @@ if ( !class_exists( 'Questions' ) ) {
 
 		public function add_question() {
 			$ts = (int) $this->content[ 'ts' ];
+			$user_id = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$user = $this->content[ 'user' ];
+
+				require get_parent_theme_file_path( '/modules/users/class-users.php' );
+				$users	 = new Users();
+				$user_id = $users->get_user_from_slack_id( $user );
+			}
 
 			// Create post object
 			$my_question = array(
