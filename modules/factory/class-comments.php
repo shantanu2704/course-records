@@ -56,19 +56,6 @@ if ( !class_exists( 'Comments' ) ) {
 				add_comment_meta( $comment_id, 'cr_' . $key, $value);
 			}
 		}
-		
-		private function get_username_from_slack_id() {
-			$return_value = '';
-			if ( array_key_exists( 'user', $this->content ) ) {
-				$args	 = array(
-					'meta_key'	 => 'slack_username',
-					'meta_value' => $this->content[ 'user' ],
-					'fields'	 => array( 'display_name', 'ID' )
-				);
-				$return_value	 = get_users( $args );
-			}
-			return $return_value;
-		}
 
 	}
 
