@@ -128,7 +128,11 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				}
 				
 				$message_type = $this->check_message_subtype( $content );
-				$this->replace_slack_user_id_with_names( $content );
+				
+				require get_parent_theme_file_path( '/modules/users/class-users.php' );
+				$users = new Users();
+				$users->replace_slack_user_id_with_names( $content );
+				
 				$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type );
 			}
 		}
