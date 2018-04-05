@@ -93,20 +93,20 @@ if ( !class_exists( 'Users' ) ) {
 		
 		/**
 		 * Get WordPress user object from Slack ID
+		 * @param int Slack ID
 		 * @return array WordPress user objects
 		 */
-		public function get_user_from_slack_id() {
+		public function get_user_from_slack_id( $slack_id ) {
 			$user_object = '';
-			if ( array_key_exists( 'user', $this->content ) ) {
-				$args	 = array(
-					'meta_key'	 => 'slack_username',
-					'meta_value' => $this->content[ 'user' ],
-					'fields'	 => 'ID'
-				);
-				$user	 = get_users( $args );
-				if ( isset($user[ 0 ] ) ) {
-					$user_object = ( int ) $user[ 0 ];
-				}
+
+			$args	 = array(
+				'meta_key'	 => 'slack_username',
+				'meta_value' => $slack_id,
+				'fields'	 => 'ID'
+			);
+			$user	 = get_users( $args );
+			if ( isset( $user[ 0 ] ) ) {
+				$user_object = ( int ) $user[ 0 ];
 			}
 			return $user_object;
 		}
