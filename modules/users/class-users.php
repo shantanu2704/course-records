@@ -96,7 +96,7 @@ if ( !class_exists( 'Users' ) ) {
 		 * @return array WordPress user objects
 		 */
 		public function get_user_from_slack_id() {
-			$return_value = '';
+			$user_object = '';
 			if ( array_key_exists( 'user', $this->content ) ) {
 				$args	 = array(
 					'meta_key'	 => 'slack_username',
@@ -105,10 +105,10 @@ if ( !class_exists( 'Users' ) ) {
 				);
 				$user	 = get_users( $args );
 				if ( isset($user[ 0 ] ) ) {
-					$return_value = ( int ) $user[ 0 ];
+					$user_object = ( int ) $user[ 0 ];
 				}
 			}
-			return $return_value;
+			return $user_object;
 		}
 
 	}
