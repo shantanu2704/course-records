@@ -37,7 +37,7 @@ if ( !class_exists( 'Users' ) ) {
 		 */
 		public function __construct() {
 			
-			$this->slack_user_ids = array (
+			$slack_user_ids = array (
 				'<@U9H7QT561>',	// Archana
 				'<@U9E46DFUH>',	// Chandni
 				'<@U9HUZURK2>',	// Gaurav
@@ -56,7 +56,9 @@ if ( !class_exists( 'Users' ) ) {
 				'<@U9DS10XPG>',	// Akka
 			);
 			
-			$this->usernames = array(
+			$this->slack_user_ids = apply_filters( 'cr_slack_user_ids', $slack_user_ids );
+
+			$usernames = array(
 				'@Archana',
 				'@Chandni',
 				'@Gaurav',
@@ -74,6 +76,8 @@ if ( !class_exists( 'Users' ) ) {
 				'@channel',
 				'@Akka',
 			);
+
+			$this->usernames = apply_filters( 'cr_usernames', $usernames );
 		}
 
 	}
