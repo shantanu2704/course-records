@@ -434,7 +434,7 @@ $cr_register->init();
 /** 	
  * User meta.
  */
-require get_parent_theme_file_path( '/modules/user-meta/class-user-meta.php' );
+require get_parent_theme_file_path( '/modules/users/class-user-meta.php' );
 $user_meta = new User_Meta();
 $user_meta->init();
 
