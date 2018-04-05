@@ -89,6 +89,24 @@ if ( !class_exists( 'Users' ) ) {
 			
 			$content[ 'text' ] = str_replace( $this->slack_user_ids, $this->usernames, $content[ 'text' ] );
 		}
+		
+		
+		/**
+		 * Get WordPress user object from Slack ID
+		 * @return array WordPress user objects
+		 */
+		public function get_user_from_slack_id() {
+			$return_value = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$args			 = array(
+					'meta_key'	 => 'slack_username',
+					'meta_value' => $this->content[ 'user' ],
+					'fields'	 => array( 'display_name', 'ID' )
+				);
+				$return_value	 = get_users( $args );
+			}
+			return $return_value;
+		}
 
 	}
 
