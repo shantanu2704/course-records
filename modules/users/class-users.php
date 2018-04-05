@@ -39,18 +39,18 @@ if ( !class_exists( 'Users' ) ) {
 			
 			$slack_user_ids = array (
 				'<@U9H7QT561>',	// Archana
+				'<@U9DHNB324>',	// Ashish
 				'<@U9E46DFUH>',	// Chandni
 				'<@U9HUZURK2>',	// Gaurav
-				'<@U9GTQ3J85>',	// Naweed
 				'<@U9K4V3AUE>',	// Jitender
 				'<@U9EFHHDM0>',	// Kamlesh
-				'<@U9E76V412>',	// Parth
-				'<@U9DHNB324>',	// Sasi
+				'<@U9GTQ3J85>',	// Naweed
+				'<@U9E76V412>',	// Parth				
 				'<@U9ATTAU00>',	// Saurabh
+				'<@U9GMWL93L>',	// Shantanu
 				'<@U9HEB6PMX>',	// Sheeba
 				'<@U9EB4N9EH>',	// Tushar
 				'<@U9K0JAMDZ>',	// VIshal
-				'<@U9GMWL93L>',	// Wpshades
 				'<@U9DQ94KM3>',	// must-read
 				'<!channel>',		// channel
 				'<@U9DS10XPG>',	// Akka
@@ -60,24 +60,34 @@ if ( !class_exists( 'Users' ) ) {
 
 			$usernames = array(
 				'@Archana',
+				'@Ashish',
 				'@Chandni',
 				'@Gaurav',
-				'@Naweed',
 				'@Jitender',
 				'@Kamlesh',
+				'@Naweed',
 				'@Parth',
-				'@Sasi',
 				'@Saurabh',
+				'@Shantanu',
 				'@Sheeba',
 				'@Tushar',
-				'@VIshal',
-				'@Wpshades',
+				'@Vishal',
 				'@must-read',
 				'@channel',
 				'@Akka',
 			);
 
 			$this->usernames = apply_filters( 'cr_usernames', $usernames );
+		}
+		
+				
+		/**
+		 * Replace Slack ID with names
+		 * @param array $content Decoded JSON message
+		 */
+		public function replace_slack_user_id_with_names( &$content ) {
+			
+			$content[ 'text' ] = str_replace( $this->slack_user_ids, $this->usernames, $content[ 'text' ] );
 		}
 
 	}
