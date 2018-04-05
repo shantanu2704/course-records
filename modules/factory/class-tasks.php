@@ -33,12 +33,12 @@ if ( !class_exists( 'Tasks' ) ) {
 			$user_id = '';
 			if ( array_key_exists( 'user', $this->content ) ) {
 				$user = $this->content[ 'user' ];
-				
+
 				require get_parent_theme_file_path( '/modules/users/class-users.php' );
-				$users = new Users();
+				$users	 = new Users();
 				$user_id = $users->get_user_from_slack_id( $user );
 			}
-			
+
 			// Create post object
 			$my_task = array(
 				'post_author'	 => $user_id,
