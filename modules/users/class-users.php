@@ -110,6 +110,23 @@ if ( !class_exists( 'Users' ) ) {
 			}
 			return $user_object;
 		}
+		
+		/**
+		 * 
+		 * @param array $reactions Multidimensional array of reactions with users.
+		 */
+		public function task_completion( $task, $reactions ) {
+			$tasks = array(
+				'complete'	 => array(),
+				'incomplete' => array(),
+			);
+
+			foreach ( $reactions as $reaction ) {
+				if ( 'white_check_mark' === $reaction[ name ] ) {
+					$this->add_reaction_to_user_meta( $task, 'white_check_mark', $reaction[ 'users' ] );
+				}
+			}
+		}
 
 	}
 

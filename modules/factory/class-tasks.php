@@ -37,6 +37,9 @@ if ( !class_exists( 'Tasks' ) ) {
 				require get_parent_theme_file_path( '/modules/users/class-users.php' );
 				$users	 = new Users();
 				$user_id = $users->get_user_from_slack_id( $user );
+				if ( array_key_exists( 'reactions', $this->content ) ) {
+					$users->task_completion( $this->content['reactions'] );
+				}
 			}
 
 			// Create post object
@@ -51,6 +54,7 @@ if ( !class_exists( 'Tasks' ) ) {
 			// Insert post into database
 			$task_id =  wp_insert_post( $my_task );
 			$this->add_question_meta( $task_id );
+			
 		}
 		
 		public function add_question_meta( $task_id ) {
