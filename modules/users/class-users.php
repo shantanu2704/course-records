@@ -134,19 +134,6 @@ if ( !class_exists( 'Users' ) ) {
 				
 			}
 		}
-		
-		
-		/**
-		 * Get a user's display name from their slack ID
-		 * @param string $slack_id
-		 */
-		public function get_display_name_from_slack_id( $slack_id ) {
-			if ( is_array( $slack_id ) ) {
-				$flipped_slack_user_ids = array_flip( $this->slack_user_ids );
-				return $this->usernames[ $flipped_slack_user_ids[ $slack_id ] ];
-			}
-			
-		}
 
 	}
 
