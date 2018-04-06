@@ -38,7 +38,7 @@ if ( !class_exists( 'Tasks' ) ) {
 				$users	 = new Users();
 				$user_id = $users->get_user_from_slack_id( $user );
 				if ( array_key_exists( 'reactions', $this->content ) ) {
-					$users->task_completion( $this->content[ 'text' ], $this->content['reactions'] );
+					$users->add_reaction_to_user_meta( $this->content[ 'text' ], $this->content['reactions'] );
 				}
 			}
 

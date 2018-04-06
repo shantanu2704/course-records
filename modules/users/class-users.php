@@ -17,7 +17,7 @@ if ( !class_exists( 'Users' ) ) {
 	 * @since 0.0.1
 	 */
 	class Users {
-		
+
 		/**
 		 * An array to hold the Slack IDs as keys and display names as values for users
 		 * @var array
@@ -65,12 +65,11 @@ if ( !class_exists( 'Users' ) ) {
 		 * @param array $content Decoded JSON message
 		 */
 		public function replace_slack_user_id_with_names( &$content ) {
-			
-			$content[ 'text' ] = str_replace( array_keys( $this->slack_users ), array_values( $this->slack_users ), $content[ 'text' ] );
-			$content[ 'text' ] = str_replace( array_keys( $this->slack_bots ), array_values( $this->slack_bots ), $content[ 'text' ] );
+
+			$content[ 'text' ]	 = str_replace( array_keys( $this->slack_users ), array_values( $this->slack_users ), $content[ 'text' ] );
+			$content[ 'text' ]	 = str_replace( array_keys( $this->slack_bots ), array_values( $this->slack_bots ), $content[ 'text' ] );
 		}
-		
-		
+
 		/**
 		 * Get WordPress user object from Slack ID
 		 * @param int Slack ID
@@ -90,49 +89,51 @@ if ( !class_exists( 'Users' ) ) {
 			}
 			return $user_object;
 		}
-		
-		
+
 		/**
 		 * 
 		 * @param array $reactions Multidimensional array of reactions with users.
 		 */
-		public function task_completion( $task, $reactions ) {
-			$tasks = array(
-				'complete'	 => array(),
-				'incomplete' => array(),
-			);
+//		public function task_completion( $task, $reactions ) {
+//			$tasks = array(
+//				'complete'	 => array(),
+//				'incomplete' => array(),
+//			);
+//
+//			foreach ( $reactions as $reaction ) {
+//				if ( 'white_check_mark' === $reaction[ name ] ) {
+//					$this->add_reaction_to_user_meta( $task, $reaction[ 'users' ] );
+//					$tasks[ 'complete' ]	 = array_merge( $tasks[ 'complete' ], $reaction[ 'users' ] );
+//					$tasks[ 'incomplete' ]	 = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_bot_ids, $reaction[ 'users' ] ) );
+//				}
+//			}
+//		}
 
-			foreach ( $reactions as $reaction ) {
-				if ( 'white_check_mark' === $reaction[ name ] ) {
-					$this->add_reaction_to_user_meta( $task, $reaction[ 'users' ] );
-					$tasks[ 'complete' ] = array_merge( $tasks[ 'complete' ], $reaction[ 'users' ] );
-					$tasks[ 'incomplete' ] = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_bot_ids, $reaction[ 'users' ] ) );
-				}
-			}
-		}
-		
-		
 		/**
 		 * Add reaction to user meta
 		 * @param string $task
-		 * @param array $users
+		 * @param array $reactions Multidimensional array of reactions with users.
 		 */
-		public function add_reaction_to_user_meta( $task, $users ) {
-			
-			foreach ( $users as $user ) {
-				$id = $this->get_user_from_slack_id( $user );
-				$display_name = $this->slack_users[ $user ];
-				$user_task_meta = get_user_meta( $id, 'TASK - ' . $display_name, true);
-				
-				if ( empty( $user_task_meta ) ) {
-					update_user_meta( $id, 'TASK - ' . $display_name, array ($task ) );
-				} else {
-					$user_task_meta_array = ( is_array($user_task_meta) ) ? $user_task_meta : array ( $user_task_meta );
-					$user_task_meta_array[] = $task;
-					update_user_meta( $id, 'TASK - ' . $display_name, $user_task_meta_array );
-				}
-				
-			}
+		public function add_reaction_to_user_meta( $task, $reactions ) {
+
+			foreach ( $reactions as $reaction ) {
+				if ( 'white_check_mark' === $reaction[ name ] ) {
+					foreach ( $reactions[ 'users' ] as $user ) {
+						$id				 = $this->get_user_from_slack_id( $user );
+						$display_name	 = $this->slack_users[ $user ];
+						$user_task_meta	 = get_user_meta( $id, 'TASK - ' . $display_name, true );
+
+						if ( empty( $user_task_meta ) ) {
+							update_user_meta( $id, 'TASK - ' . $display_name, array( $task ) );
+						}
+						else {
+							$user_task_meta_array	 = ( is_array( $user_task_meta ) ) ? $user_task_meta : array( $user_task_meta );
+							$user_task_meta_array[]	 = $task;
+							update_user_meta( $id, 'TASK - ' . $display_name, $user_task_meta_array );
+						}
+					} // foreach ( $reactions[ 'users' ] as $user )
+				} // if ( 'white_check_mark' === $reaction[ name ] ) 
+			} // foreach ( $reactions as $reaction )
 		}
 
 	}
