@@ -132,13 +132,24 @@ if ( !class_exists( 'Users' ) ) {
 		
 		/**
 		 * Add reaction to user meta
-		 * @param string $reaction
+		 * @param string $task
 		 * @param array $users
 		 */
 		public function add_reaction_to_user_meta( $task, $reaction, $users ) {
+			
 			foreach ( $users as $user ) {
-				add_user_meta($this->get_user_from_slack_id( $user ), 'TASK - ' . $task, $reaction );
+				add_user_meta($this->get_user_from_slack_id( $user ), 'TASK - ' . $this->get_display_name_from_slack_id( $user ), $task );
 			}
+		}
+		
+		
+		/**
+		 * Get a user's display name from their slack ID
+		 * @param string $slack_id
+		 */
+		public function get_display_name_from_slack_id( $slack_id ) {
+			$flipped_slack_user_ids = array_flip( $this->slack_user_ids );
+			return $this->usernames[ $flipped_slack_user_ids[ $slack_id ] ];
 		}
 
 	}
