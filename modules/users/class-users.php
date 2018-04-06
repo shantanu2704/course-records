@@ -111,6 +111,7 @@ if ( !class_exists( 'Users' ) ) {
 			return $user_object;
 		}
 		
+		
 		/**
 		 * 
 		 * @param array $reactions Multidimensional array of reactions with users.
@@ -125,6 +126,18 @@ if ( !class_exists( 'Users' ) ) {
 				if ( 'white_check_mark' === $reaction[ name ] ) {
 					$this->add_reaction_to_user_meta( $task, 'white_check_mark', $reaction[ 'users' ] );
 				}
+			}
+		}
+		
+		
+		/**
+		 * Add reaction to user meta
+		 * @param string $reaction
+		 * @param array $users
+		 */
+		public function add_reaction_to_user_meta( $task, $reaction, $users ) {
+			foreach ( $users as $user ) {
+				add_user_meta($this->get_user_from_slack_id( $user ), 'TASK - ' . $task, $reaction );
 			}
 		}
 
