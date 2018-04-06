@@ -135,10 +135,21 @@ if ( !class_exists( 'Users' ) ) {
 		 * @param string $task
 		 * @param array $users
 		 */
-		public function add_reaction_to_user_meta( $task, $reaction, $users ) {
+		public function add_reaction_to_user_meta( $task, $users ) {
 			
 			foreach ( $users as $user ) {
-				add_user_meta($this->get_user_from_slack_id( $user ), 'TASK - ' . $this->get_display_name_from_slack_id( $user ), $task );
+				$id = $this->get_user_from_slack_id( $user );
+				$display_name = $this->get_display_name_from_slack_id( $user );
+				$user_task_meta = get_user_meta( $id, 'TASK - ' . $display_name, true);
+				
+				if ( empty( $user_task_meta ) ) {
+					update_user_meta( $id, 'TASK - ' . $display_name, array ($task ) );
+				} else {
+					$user_task_meta_array = ( is_array($user_task_meta) ) ? $user_task_meta : array ( $user_task_meta );
+					$user_task_meta_array[] = $task;
+					update_user_meta( $id, 'TASK - ' . $display_name, v );
+				}
+				
 			}
 		}
 		
