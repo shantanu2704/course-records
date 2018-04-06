@@ -147,7 +147,7 @@ if ( !class_exists( 'Users' ) ) {
 				} else {
 					$user_task_meta_array = ( is_array($user_task_meta) ) ? $user_task_meta : array ( $user_task_meta );
 					$user_task_meta_array[] = $task;
-					update_user_meta( $id, 'TASK - ' . $display_name, v );
+					update_user_meta( $id, 'TASK - ' . $display_name, $user_task_meta_array );
 				}
 				
 			}
