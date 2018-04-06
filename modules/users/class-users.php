@@ -66,8 +66,8 @@ if ( !class_exists( 'Users' ) ) {
 		 */
 		public function replace_slack_user_id_with_names( &$content ) {
 			
-			$content[ 'text' ] = str_replace( $this->slack_user_ids, $this->usernames, $content[ 'text' ] );
-			$content[ 'text' ] = str_replace( $this->slack_bot_ids, $this->botnames, $content[ 'text' ] );
+			$content[ 'text' ] = str_replace( array_keys( $this->slack_users ), array_values( $this->slack_users ), $content[ 'text' ] );
+			$content[ 'text' ] = str_replace( array_keys( $this->slack_bots ), array_values( $this->slack_bots ), $content[ 'text' ] );
 		}
 		
 		
@@ -104,7 +104,7 @@ if ( !class_exists( 'Users' ) ) {
 
 			foreach ( $reactions as $reaction ) {
 				if ( 'white_check_mark' === $reaction[ name ] ) {
-					$this->add_reaction_to_user_meta( $task, 'white_check_mark', $reaction[ 'users' ] );
+					$this->add_reaction_to_user_meta( $task, $reaction[ 'users' ] );
 					$tasks[ 'complete' ] = array_merge( $tasks[ 'complete' ], $reaction[ 'users' ] );
 					$tasks[ 'incomplete' ] = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_bot_ids, $reaction[ 'users' ] ) );
 				}
@@ -121,7 +121,7 @@ if ( !class_exists( 'Users' ) ) {
 			
 			foreach ( $users as $user ) {
 				$id = $this->get_user_from_slack_id( $user );
-				$display_name = $this->get_display_name_from_slack_id( $user );
+				$display_name = $this->slack_users[ $user ];
 				$user_task_meta = get_user_meta( $id, 'TASK - ' . $display_name, true);
 				
 				if ( empty( $user_task_meta ) ) {
