@@ -37,24 +37,24 @@ if ( !class_exists( 'Users' ) ) {
 		 */
 		public function __construct() {
 			$slack_users		 = array(
-				'<@U9H7QT561>'	 => '@Archana',
-				'<@U9DHNB324>'	 => '@Ashish',
-				'<@U9E46DFUH>'	 => '@Chandni',
-				'<@U9HUZURK2>'	 => '@Gaurav',
-				'<@U9K4V3AUE>'	 => '@Jitender',
-				'<@U9EFHHDM0>'	 => '@Kamlesh',
-				'<@U9GTQ3J85>'	 => '@Naweed',
-				'<@U9E76V412>'	 => '@Parth',
-				'<@U9ATTAU00>'	 => '@Saurabh',
-				'<@U9GMWL93L>'	 => '@Shantanu',
-				'<@U9HEB6PMX>'	 => '@Sheeba',
-				'<@U9EB4N9EH>'	 => '@Tushar',
-				'<@U9K0JAMDZ>'	 => '@Vishal',
+				'U9H7QT561'	 => 'Archana',
+				'U9DHNB324'	 => 'Ashish',
+				'U9E46DFUH'	 => 'Chandni',
+				'U9HUZURK2'	 => 'Gaurav',
+				'U9K4V3AUE'	 => 'Jitender',
+				'U9EFHHDM0'	 => 'Kamlesh',
+				'U9GTQ3J85'	 => 'Naweed',
+				'U9E76V412'	 => 'Parth',
+				'U9ATTAU00'	 => 'Saurabh',
+				'U9GMWL93L'	 => 'Shantanu',
+				'U9HEB6PMX'	 => 'Sheeba',
+				'U9EB4N9EH'	 => 'Tushar',
+				'U9K0JAMDZ'	 => 'Vishal',
 			);
 			$slack_bots			 = array(
-				'<@U9DQ94KM3>'	 => 'must-read',
-				'<!channel>'	 => 'channel',
-				'<@U9DS10XPG>'	 => 'Akka',
+				'U9DQ94KM3'	 => 'must-read',
+				'channel'	 => 'channel',
+				'U9DS10XPG'	 => 'Akka',
 			);
 			$this->slack_users	 = apply_filters( 'cr_slack_user_ids', $slack_users );
 			$this->slack_bots	 = apply_filters( 'cr_slack_bot_ids', $slack_bots );
@@ -100,19 +100,26 @@ if ( !class_exists( 'Users' ) ) {
 		/**
 		 * 
 		 * @param array $reactions Multidimensional array of reactions with users.
+		 * @return array A multidimensional array with a list of users who have 
+		 *			completed the task and are yet to complete the task with 
+		 *			keys - 'complete' and 'incomplete'
 		 */
-		public function get_user_list_for_task( $task, $reactions ) {
+		public function get_user_list_for_task( $reactions ) {
 			$tasks = array(
 				'complete'	 => array(),
 				'incomplete' => array(),
 			);
 
 			foreach ( $reactions as $reaction ) {
-				if ( 'white_check_mark' === $reaction[ name ] ) {
-					$tasks[ 'complete' ]	 = array_merge( $tasks[ 'complete' ], $reaction[ 'users' ] );
-					$tasks[ 'incomplete' ]	 = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_bot_ids, $reaction[ 'users' ] ) );
+				if ( 'white_check_mark' === $reaction[ 'name' ] ) {					
+					foreach ( $reaction[ 'users' ] as $user ) {
+						$tasks[ 'complete' ][] = $this->slack_users[ $user ];
+					}
+					$tasks[ 'incomplete' ]	 = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_users, $tasks[ 'complete' ] ) );
 				}
 			}
+			
+			return $tasks;
 		}
 
 		/**
