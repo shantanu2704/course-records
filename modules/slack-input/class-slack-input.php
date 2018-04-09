@@ -131,7 +131,8 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				
 				require get_parent_theme_file_path( '/modules/users/class-users.php' );
 				$users = new Users();
-				$users->replace_slack_user_id_with_names( $content );
+				$content[ 'text' ] = $users->replace_slack_user_id_with_names( $content[ 'text' ] );
+				$content[ 'text' ] = $users->replace_slack_bot_id_with_names( $content[ 'text' ] );
 				
 				$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type );
 			}
