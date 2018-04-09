@@ -53,11 +53,11 @@ if ( !class_exists( 'Tasks' ) ) {
 			);
 			// Insert post into database
 			$task_id =  wp_insert_post( $my_task );
-			$this->add_question_meta( $task_id );
+			$this->add_task_meta( $task_id );
 			
 		}
 		
-		public function add_question_meta( $task_id ) {
+		public function add_task_meta( $task_id ) {
 			foreach ( $this->content as $key => $value ) {
 				add_post_meta( $task_id, 'cr_' . $key, $value);
 			}
