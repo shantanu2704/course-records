@@ -61,7 +61,7 @@ if ( !class_exists( 'Users' ) ) {
 		}
 
 		/**
-		 * Replace Slack ID with names
+		 * Replace Slack User ID with names
 		 * @param mixed $content String/Array to be searched
 		 */
 		public function replace_slack_user_id_with_names( $content ) {
@@ -70,7 +70,7 @@ if ( !class_exists( 'Users' ) ) {
 
 
 		/**
-		 * Replace Slack ID with names
+		 * Replace Slack Bot ID with names
 		 * @param mixed $content String/Array to be searched
 		 */
 		public function replace_slack_bot_id_with_names( $content ) {
