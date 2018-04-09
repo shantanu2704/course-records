@@ -62,12 +62,19 @@ if ( !class_exists( 'Users' ) ) {
 
 		/**
 		 * Replace Slack ID with names
-		 * @param array $content Decoded JSON message
+		 * @param mixed $content String/Array to be searched
 		 */
-		public function replace_slack_user_id_with_names( &$content ) {
+		public function replace_slack_user_id_with_names( $content ) {
+			return str_replace( array_keys( $this->slack_users ), array_values( $this->slack_users ), $content );
+		}
 
-			$content[ 'text' ]	 = str_replace( array_keys( $this->slack_users ), array_values( $this->slack_users ), $content[ 'text' ] );
-			$content[ 'text' ]	 = str_replace( array_keys( $this->slack_bots ), array_values( $this->slack_bots ), $content[ 'text' ] );
+
+		/**
+		 * Replace Slack ID with names
+		 * @param mixed $content String/Array to be searched
+		 */
+		public function replace_slack_bot_id_with_names( $content ) {
+			return str_replace( array_keys( $this->slack_bots ), array_values( $this->slack_bots ), $content );
 		}
 
 		/**
@@ -94,20 +101,19 @@ if ( !class_exists( 'Users' ) ) {
 		 * 
 		 * @param array $reactions Multidimensional array of reactions with users.
 		 */
-//		public function task_completion( $task, $reactions ) {
-//			$tasks = array(
-//				'complete'	 => array(),
-//				'incomplete' => array(),
-//			);
-//
-//			foreach ( $reactions as $reaction ) {
-//				if ( 'white_check_mark' === $reaction[ name ] ) {
-//					$this->add_reaction_to_user_meta( $task, $reaction[ 'users' ] );
-//					$tasks[ 'complete' ]	 = array_merge( $tasks[ 'complete' ], $reaction[ 'users' ] );
-//					$tasks[ 'incomplete' ]	 = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_bot_ids, $reaction[ 'users' ] ) );
-//				}
-//			}
-//		}
+		public function get_user_list_for_task( $task, $reactions ) {
+			$tasks = array(
+				'complete'	 => array(),
+				'incomplete' => array(),
+			);
+
+			foreach ( $reactions as $reaction ) {
+				if ( 'white_check_mark' === $reaction[ name ] ) {
+					$tasks[ 'complete' ]	 = array_merge( $tasks[ 'complete' ], $reaction[ 'users' ] );
+					$tasks[ 'incomplete' ]	 = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_bot_ids, $reaction[ 'users' ] ) );
+				}
+			}
+		}
 
 		/**
 		 * Add reaction to user meta
