@@ -132,6 +132,9 @@ if ( !class_exists( 'Users' ) ) {
 			foreach ( $reactions as $reaction ) {
 				if ( 'white_check_mark' === $reaction[ 'name' ] ) {
 					foreach ( $reaction[ 'users' ] as $user ) {
+						if ( $user === 'U9DQ94KM3' ) {
+							continue;
+						}
 						$id				 = $this->get_user_from_slack_id( $user );
 						$display_name	 = $this->slack_users[ $user ];
 						$user_task_meta	 = get_user_meta( $id, 'TASK - ' . $display_name, true );
