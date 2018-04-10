@@ -40,16 +40,16 @@ if ( !class_exists( 'User_Meta' ) ) {
 		function add_custom_user_profile_field( $profileuser ) {
 			
 			// Get the slack_username
-			$user_meta = get_user_meta( $profileuser->ID, 'slack_username', TRUE );
+			$user_meta = get_user_meta( $profileuser->ID, '_cr_slack_username', TRUE );
 			?>
 			<!-- Add another filed to the form for the 'slack_username' -->
 			<table class="form-table">
 				<tr>
 					<th>
-						<label for="slack_username"><?php _e( 'Slack Username' ); ?></label>
+						<label for="cr_slack_username"><?php _e( 'Slack Username' ); ?></label>
 					</th>
 					<td>
-						<input type="text" name="slack_username" id="slack_username" value="<?php echo esc_attr( $user_meta ); ?>" class="regular-text" />
+						<input type="text" name="cr_slack_username" id="cr_slack_username" value="<?php echo esc_attr( $user_meta ); ?>" class="regular-text" />
 					</td>
 				</tr>
 			</table>
@@ -71,10 +71,10 @@ if ( !class_exists( 'User_Meta' ) ) {
 			}
 			
 			// Get the input from $_POST
-			$slack_username = filter_input( INPUT_POST, 'slack_username' );
+			$slack_username = filter_input( INPUT_POST, 'cr_slack_username' );
 			
 			// Update the database with user input
-			update_usermeta( $user_id, 'slack_username', $slack_username );
+			update_usermeta( $user_id, '_cr_slack_username', $slack_username );
 		}
 
 	}

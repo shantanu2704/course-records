@@ -59,7 +59,7 @@ if ( !class_exists( 'Tasks' ) ) {
 		
 		public function add_task_meta( $task_id ) {
 			foreach ( $this->content as $key => $value ) {
-				add_post_meta( $task_id, 'cr_' . $key, $value);
+				add_post_meta( $task_id, '_cr_' . $key, $value);
 			}
 		}
 		

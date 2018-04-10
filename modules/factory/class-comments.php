@@ -59,7 +59,7 @@ if ( !class_exists( 'Comments' ) ) {
 		
 		public function add_comment_meta( $comment_id ) {
 			foreach ( $this->content as $key => $value ) {
-				add_comment_meta( $comment_id, 'cr_' . $key, $value);
+				add_comment_meta( $comment_id, '_cr_' . $key, $value);
 			}
 		}
 

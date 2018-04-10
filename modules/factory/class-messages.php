@@ -64,7 +64,7 @@ if ( !class_exists( 'Messages' ) ) {
 		
 		public function add_message_meta( $message_id ) {
 			foreach ( $this->content as $key => $value ) {
-				add_post_meta( $message_id, 'cr_' . $key, $value);
+				add_post_meta( $message_id, '_cr_' . $key, $value);
 			}
 		}
 

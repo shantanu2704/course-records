@@ -22,7 +22,7 @@ get_header();
 
 				get_template_part( 'components/post/content', 'question' );
 
-				$reactions = get_post_meta( get_the_ID(), 'cr_reactions' );
+				$reactions = get_post_meta( get_the_ID(), '_cr_reactions' );
 				?>
 				<div class="reactions" data-reactions="
 					 <?php

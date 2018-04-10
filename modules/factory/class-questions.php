@@ -55,7 +55,7 @@ if ( !class_exists( 'Questions' ) ) {
 		
 		public function add_question_meta( $question_id ) {
 			foreach ( $this->content as $key => $value ) {
-				add_post_meta( $question_id, 'cr_' . $key, $value);
+				add_post_meta( $question_id, '_cr_' . $key, $value);
 			}
 		}
 

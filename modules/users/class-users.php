@@ -137,7 +137,7 @@ if ( !class_exists( 'Users' ) ) {
 						}
 						$id				 = $this->get_user_from_slack_id( $user );
 						$display_name	 = $this->slack_users[ $user ];
-						add_user_meta( $id, 'TASK - ' . $display_name, $task );
+						add_user_meta( $id, '_cr_TASK_' . $display_name, $task );
 					} // foreach ( $reactions[ 'users' ] as $user )
 				} // if ( 'white_check_mark' === $reaction[ name ] ) 
 			} // foreach ( $reactions as $reaction )
