@@ -134,6 +134,8 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				$content[ 'text' ] = $users->replace_slack_user_id_with_names( $content[ 'text' ] );
 				$content[ 'text' ] = $users->replace_slack_bot_id_with_names( $content[ 'text' ] );
 				
+				$content[ 'text' ] = str_replace(array( '<', '>' ), '', $content[ 'text' ] );
+				
 				$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type );
 			}
 		}
