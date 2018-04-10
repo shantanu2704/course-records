@@ -461,3 +461,11 @@ function cr_query_vars( $qvars ) {
 }
 
 add_filter( 'request', 'cr_query_vars' );
+
+/** 	
+ * Emoji
+ */
+require get_parent_theme_file_path( '/modules/emoji/class-emoji.php' );
+$emoji = new Emoji();
+$emoji->init();
+
