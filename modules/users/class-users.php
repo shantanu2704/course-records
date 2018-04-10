@@ -137,15 +137,7 @@ if ( !class_exists( 'Users' ) ) {
 						}
 						$id				 = $this->get_user_from_slack_id( $user );
 						$display_name	 = $this->slack_users[ $user ];
-						$user_task_meta	 = get_user_meta( $id, 'TASK - ' . $display_name, true );
-
-						if ( empty( $user_task_meta ) ) {
-							update_user_meta( $id, 'TASK - ' . $display_name, array( $task ) );
-						} else {
-							$user_task_meta_array	 = ( is_array( $user_task_meta ) ) ? $user_task_meta : array( $user_task_meta );
-							$user_task_meta_array[]	 = $task;
-							update_user_meta( $id, 'TASK - ' . $display_name, $user_task_meta_array );
-						}
+						add_user_meta( $id, 'TASK - ' . $display_name, $task );
 					} // foreach ( $reactions[ 'users' ] as $user )
 				} // if ( 'white_check_mark' === $reaction[ name ] ) 
 			} // foreach ( $reactions as $reaction )
