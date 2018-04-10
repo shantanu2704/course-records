@@ -49,6 +49,7 @@
 
 	<div class="entry-content">
 		<?php
+			get_template_part( 'components/post/content', 'author' );
 			/* translators: %s: Name of current post */
 			the_content( sprintf(
 				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
