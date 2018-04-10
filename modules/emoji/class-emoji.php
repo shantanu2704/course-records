@@ -16,6 +16,6 @@ if ( !class_exists( 'Emoji' ) ) {
 	 * @since 0.0.1
 	 */
 	class Emoji {
-		
+
 	}
 }
