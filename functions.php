@@ -461,3 +461,24 @@ function cr_query_vars( $qvars ) {
 }
 
 add_filter( 'request', 'cr_query_vars' );
+
+$style_src = '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css';
+
+if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+	$style_src = '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.css';
+}
+
+wp_enqueue_style( 'emoji_style', $style_src );
+
+$script_src = '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.min.js';
+
+if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+	$style_src = '//cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.js';
+}
+
+wp_enqueue_script( 'emoji_script', $style_src );
+
+wp_enqueue_script( 'cr_emoji', get_parent_theme_file_path( '/assets/js/cr-emoji.js' ), array( 'jquery', 'emoji_script' ) );
+
+
+
