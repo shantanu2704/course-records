@@ -4,7 +4,7 @@
  * @since 0.0.1
  */
 $reactions = get_post_meta( get_the_ID(), '_cr_reactions' ); ?>
-<div class="cr-reactions" data-cr-reactions="
+<div class="cr-reactions" id="cr-reactions" data-cr-reactions="
 	 <?php
 	 if ( isset( $reactions[ 0 ] ) ) {
 		 foreach ( $reactions[ 0 ] as $reaction ) {
