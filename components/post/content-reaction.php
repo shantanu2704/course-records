@@ -1,8 +1,27 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+<?php 
+/**
+ * Displays user reactions
+ * @since 0.0.1
  */
-
+$reactions = get_post_meta( get_the_ID(), '_cr_reactions' ); ?>
+<div class="cr-reactions" data-cr-reactions="
+	 <?php
+	 if ( isset( $reactions[ 0 ] ) ) {
+		 foreach ( $reactions[ 0 ] as $reaction ) {
+			 if ( isset( $reaction[ 'users' ] ) ) {
+				 foreach ( $reaction[ 'users' ] as $user ) {
+					 echo $user . "\n";
+				 }
+			 }
+		 }
+	 }
+	 ?>">
+	 <?php
+		 if ( isset( $reactions[ 0 ] ) ) {
+			 foreach ( $reactions[ 0 ] as $reaction ) {
+				 echo ":" . $reaction[ 'name' ] . ":" . " : " . $reaction[ 'count' ] . "\n";
+			 }
+		 }
+		 ?>
+</div>
+<?php
