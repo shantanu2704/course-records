@@ -16,6 +16,16 @@ if ( !class_exists( 'Emoji' ) ) {
 	 * @since 0.0.1
 	 */
 	class Emoji {
+		
+		/**
+		 * Initialse this class
+		 * 
+		 * @since 0.0.1
+		 */
+		public function init() {
+
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_emoji_styles_and_scripts' ) );
+		}
 
 	}
 }
