@@ -39,7 +39,7 @@ get_header();
 						 <?php
 						if ( isset($reactions[ 0 ] ) ) {
 							foreach ( $reactions[ 0 ] as $reaction ) {
-								echo $reaction[ 'name' ] . " : " . $reaction[ 'count' ] . "\n";
+								echo ":" . $reaction[ 'name' ] .":" . " : " . $reaction[ 'count' ] . "\n";
 							}
 						 }
 						 ?>
