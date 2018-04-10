@@ -20,8 +20,9 @@
 	?>
 	<header class="entry-header">
 		<?php
-			if ( 'post' === get_post_type() ) :
+			if ( 'task' === get_post_type() ) :
 				echo '<div class="entry-meta">';
+					get_template_part( 'components/post/content', 'author' );
 					if ( is_single() ) :
 						twentyseventeen_posted_on();
 					else :
@@ -49,7 +50,6 @@
 
 	<div class="entry-content">
 		<?php
-			get_template_part( 'components/post/content', 'author' );
 			/* translators: %s: Name of current post */
 			the_content( sprintf(
 				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
