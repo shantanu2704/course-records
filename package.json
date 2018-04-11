@@ -1,0 +1,21 @@
+{
+    "name": "shantanu",
+    "version": "0.0.1",
+    "author": {
+        "name": "Shantanu"
+    },
+    "description": "A custom description for My Theme",
+    "repository": "git@git.yapapaya.in:yapapaya/my-theme/",
+    "bugs": "git@git.yapapaya.in:yapapaya/my-theme/issues/",
+    "devDependencies": {
+        "grunt": "^1.0.1",
+        "grunt-cli": "~0.1.9",
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-contrib-sass": "~0.7.3",
+        "grunt-autoprefixer": "~0.7.2",
+        "grunt-csscomb": "~2.0.1",
+        "grunt-contrib-concat": "~0.3.0",
+        "grunt-contrib-uglify": "~0.4.0",
+        "grunt-wp-i18n": "~0.4.3"
+    }
+}

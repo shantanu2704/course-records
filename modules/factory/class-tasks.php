@@ -30,14 +30,21 @@ if ( !class_exists( 'Tasks' ) ) {
 
 		public function add_task() {
 			$ts = (int) $this->content[ 'ts' ];
-			$user = '';
+			$user_id = '';
 			if ( array_key_exists( 'user', $this->content ) ) {
 				$user = $this->content[ 'user' ];
+
+				require get_parent_theme_file_path( '/modules/users/class-users.php' );
+				$users	 = new Users();
+				$user_id = $users->get_user_from_slack_id( $user );
+				if ( array_key_exists( 'reactions', $this->content ) ) {
+					$users->add_reaction_to_user_meta( $this->content[ 'text' ], $this->content['reactions'] );
+				}
 			}
-			
+
 			// Create post object
 			$my_task = array(
-				'post_author'	 => $this->get_username_from_slack_id(),
+				'post_author'	 => $user_id,
 				'post_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
@@ -46,29 +53,14 @@ if ( !class_exists( 'Tasks' ) ) {
 			);
 			// Insert post into database
 			$task_id =  wp_insert_post( $my_task );
-			$this->add_question_meta( $task_id );
+			$this->add_task_meta( $task_id );
+			
 		}
 		
-		public function add_question_meta( $task_id ) {
+		public function add_task_meta( $task_id ) {
 			foreach ( $this->content as $key => $value ) {
-				add_post_meta( $task_id, 'cr_' . $key, $value);
+				add_post_meta( $task_id, '_cr_' . $key, $value);
 			}
-		}
-		
-		private function get_username_from_slack_id() {
-			$return_value = '';
-			if ( array_key_exists( 'user', $this->content ) ) {
-				$args	 = array(
-					'meta_key'	 => 'slack_username',
-					'meta_value' => $this->content[ 'user' ],
-					'fields'	 => 'ID'
-				);
-				$user	 = get_users( $args );
-				if ( isset($user[ 0 ] ) ) {
-					$return_value = ( int ) $user[ 0 ];
-				}
-			}
-			return $return_value;
 		}
 		
 	}

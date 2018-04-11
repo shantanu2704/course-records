@@ -30,10 +30,18 @@ if ( !class_exists( 'Questions' ) ) {
 
 		public function add_question() {
 			$ts = (int) $this->content[ 'ts' ];
+			$user_id = '';
+			if ( array_key_exists( 'user', $this->content ) ) {
+				$user = $this->content[ 'user' ];
+
+				require get_parent_theme_file_path( '/modules/users/class-users.php' );
+				$users	 = new Users();
+				$user_id = $users->get_user_from_slack_id( $user );
+			}
 
 			// Create post object
 			$my_question = array(
-				'post_author'	 => $this->get_username_from_slack_id(),
+				'post_author'	 => $user_id,
 				'post_date'		 => date( "Y-m-d H:i:s", $ts ),
 				'post_content'	 => $this->content[ 'text' ],
 				'post_status'	 => 'publish',
@@ -47,24 +55,8 @@ if ( !class_exists( 'Questions' ) ) {
 		
 		public function add_question_meta( $question_id ) {
 			foreach ( $this->content as $key => $value ) {
-				add_post_meta( $question_id, 'cr_' . $key, $value);
+				add_post_meta( $question_id, '_cr_' . $key, $value);
 			}
-		}
-		
-		private function get_username_from_slack_id() {
-			$return_value = '';
-			if ( array_key_exists( 'user', $this->content ) ) {
-				$args	 = array(
-					'meta_key'	 => 'slack_username',
-					'meta_value' => $this->content[ 'user' ],
-					'fields'	 => 'ID'
-				);
-				$user	 = get_users( $args );
-				if ( isset($user[ 0 ] ) ) {
-					$return_value = ( int ) $user[ 0 ];
-				}
-			}
-			return $return_value;
 		}
 
 	}

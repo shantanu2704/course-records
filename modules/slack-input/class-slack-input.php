@@ -128,7 +128,14 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				}
 				
 				$message_type = $this->check_message_subtype( $content );
-				$this->replace_slack_user_id_with_names( $content );
+				
+				require get_parent_theme_file_path( '/modules/users/class-users.php' );
+				$users = new Users();
+				$content[ 'text' ] = $users->replace_slack_user_id_with_names( $content[ 'text' ] );
+				$content[ 'text' ] = $users->replace_slack_bot_id_with_names( $content[ 'text' ] );
+				
+				$content[ 'text' ] = str_replace(array( '<', '>' ), '', $content[ 'text' ] );
+				
 				$this->post_id		 = $post_factory->instantiate_classes( $content, $message_type );
 			}
 		}
@@ -211,51 +218,6 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			}
 		}
 		
-		private function replace_slack_user_id_with_names( &$content ) {
-			
-			$slack_user_ids = array (
-				'<@U9H7QT561>',	// Archana
-				'<@U9E46DFUH>',	// Chandni
-				'<@U9HUZURK2>',	// Gaurav
-				'<@U9GTQ3J85>',	// Naweed
-				'<@U9K4V3AUE>',	// Jitender
-				'<@U9EFHHDM0>',	// Kamlesh
-				'<@U9E76V412>',	// Parth
-				'<@U9DHNB324>',	// Sasi
-				'<@U9ATTAU00>',	// Saurabh
-				'<@U9HEB6PMX>',	// Sheeba
-				'<@U9EB4N9EH>',	// Tushar
-				'<@U9K0JAMDZ>',	// VIshal
-				'<@U9GMWL93L>',	// Wpshades
-				'<@U9DQ94KM3>',	// must-read
-				'<!channel>',		// channel
-				'<@U9DS10XPG>',	// Akka
-			);
-			
-			$replacements = array(
-				'@Archana',
-				'@Chandni',
-				'@Gaurav',
-				'@Naweed',
-				'@Jitender',
-				'@Kamlesh',
-				'@Parth',
-				'@Sasi',
-				'@Saurabh',
-				'@Sheeba',
-				'@Tushar',
-				'@VIshal',
-				'@Wpshades',
-				'@must-read',
-				'@channel',
-				'@Akka',
-			);
-			
-			$content[ 'text' ] = str_replace( $slack_user_ids, $replacements, $content[ 'text' ] );
-			print_r($content[ 'text' ]);
-//			wp_die();
-			
-		}
 	}
 
 }	
