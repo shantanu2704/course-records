@@ -1,95 +1,96 @@
+'use strict';
 
-module.exports = function ( grunt ) {
+module.exports = function( grunt ) {
 
 	grunt.initConfig( {
 		pkg: grunt.file.readJSON( 'package.json' ),
-		wp_readme_to_markdown: {
-			dist: {
+		watch: {
+			files: [ 'sass/*.scss' ],
+			tasks: 'sass:dev',
+			options: {
+				livereload: true,
+			}
+		},
+		sass: {
+			dev: {
 				options: {
-					screenshot_url: '<%= pkg.repository.url %>/raw/master/org-assets/{screenshot}.png',
-					post_convert: function ( file ) {
-						return "<img src='" + grunt.config.get( 'pkg' ).repository.url + "/raw/master/org-assets/banner-772x250.png'/>\n\n" + file;
-					}
+					style: 'expanded'
 				},
 				files: {
-					'README.md': 'readme.txt'
+					'style.css': 'sass/style.scss',
 				}
+			},
+			release: {
+				options: {
+					style: 'expanded'
+				},
+				files: {
+					'style.css': 'sass/style.scss',
+				}
+			}
+		},
+		autoprefixer: {
+			options: {
+				browsers: [ '> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie 9' ]
+			},
+			single_file: {
+				src: 'style.css',
+				dest: 'style.css'
+			}
+		},
+		csscomb: {
+			options: {
+				config: '.csscomb.json'
+			},
+			files: {
+				'style.css': [ 'style.css' ],
 			}
 		},
 		concat: {
 			release: {
 				src: [
-					'assets/js/prepend-to-next.js',
-					'assets/js/display-header-object.js',
+					'js/skip-link-focus-fix.js',
+					'js/navigation.js',
 				],
-				dest: 'assets/js/theme-structure-visualiser.min.js',
+				dest: 'js/<%= pkg.name %>-combined.min.js',
 			}
 		},
 		uglify: {
-			dist: {
-				options: {
-					mangle: {
-						reserved: [ 'jQuery', '$' ]
-					},
-					sourceMap: true,
-				},
-				files: {
-					'assets/js/theme-structure-visualiser.min.js': [ 'assets/js/theme-structure-visualiser.min.js' ]
-				}
+			release: {
+				src: 'js/<%= pkg.name %>-combined.min.js',
+				dest: 'js/<%= pkg.name %>-combined.min.js'
 			}
 		},
+		// https://www.npmjs.org/package/grunt-wp-i18n
 		makepot: {
 			target: {
 				options: {
-					domainPath: '/languages',
-					exclude: [ 'node_modules/.*', 'tests/.*' ],
-					mainFile: '<%= pkg.main %>',
-					potFilename: '<%= pkg.name %>.pot',
-					potHeaders: {
-						poedit: false,
-						'report-msgid-bugs-to': '<%= pkg.bugs.url %>'
-					},
-					type: 'wp-plugin',
-					updateTimestamp: false
+					domainPath: '/languages/', // Where to save the POT file.
+					potFilename: '<%= pkg.name %>.pot', // Name of the POT file.
+					type: 'wp-theme'  // Type of project (wp-plugin or wp-theme).
 				}
 			}
-		},
-		watch: {
-			grunt: {
-				files: [ 'Gruntfile.js' ]
-			},
-			uglify: {
-				files: [ 'admin/js/*.js', '!admin/js/*.min.js' ],
-				tasks: [ 'uglify' ]
-			},
-			wp_readme_to_markdown: {
-				files: [ 'readme.txt' ],
-				tasks: [ 'wp_readme_to_markdown' ]
-			}
-		},
-		phpcs: {
-			application: {
-				    src: [ '*' ]
-			},
-			options: {
-				bin: '/home/shantanu/.config/composer/vendor/bin/phpcs',
-				standard: 'WordPress',
-				verbose: true
-			}
 		}
+
 	} );
 
-	grunt.loadNpmTasks( 'grunt-wp-readme-to-markdown' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );        
+	grunt.loadNpmTasks( 'grunt-contrib-sass' );
+	grunt.loadNpmTasks( 'grunt-autoprefixer' );
+	grunt.loadNpmTasks( 'grunt-csscomb' );
 	grunt.loadNpmTasks( 'grunt-contrib-concat' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-wp-i18n' );
-	grunt.loadNpmTasks( 'grunt-phpcs' );
-
-	grunt.registerTask( 'default', [
-		'wp_readme_to_markdown',
-		'concat',
-		'uglify'
+        
+	grunt.registerTask( 'default', [ 'sass:dev' ] );
+	grunt.registerTask( 'release', [
+		'sass:release',
+		'autoprefixer',
+		'csscomb',
+		'concat:release',
+		'uglify:release',
+		'makepot'
 	] );
-
 };
+
+
