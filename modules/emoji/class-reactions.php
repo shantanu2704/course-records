@@ -16,7 +16,19 @@ if ( !class_exists( 'Reactions' ) ) {
 	 *
 	 * @since 0.0.1
 	 */
-	class Reactions { 
-		
+	class Reactions {
+
+		/**
+		 *
+		 * @var array Array to store reactions on a post 
+		 */
+		private $reactions;
+
+		public function __construct() {
+			global $post_id;
+			$this->reactions = get_post_meta( $post_id, '_cr_reactions' );
+		}
+
 	}
+
 }
