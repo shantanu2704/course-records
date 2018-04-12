@@ -157,6 +157,14 @@ if ( !class_exists( 'Users' ) ) {
 				} // if ( 'white_check_mark' === $reaction[ name ] ) 
 			} // foreach ( $reactions as $reaction )
 		}
+		
+		public function get_names_from_slack_ids( $slack_ids ) {
+			$names = array();
+			foreach ( $slack_ids as $slack_id ) {
+				$names[] = $this->__get( $slack_id );
+			}
+			return $names;
+		}
 
 	}
 
