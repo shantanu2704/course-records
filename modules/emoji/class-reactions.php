@@ -28,6 +28,12 @@ if ( !class_exists( 'Reactions' ) ) {
 		private $reactions;
 
 		/**
+		 * The current post ID
+		 * @var int 
+		 */
+		private $current_post_id;
+		
+		/**
 		 * Constructor
 		 * 
 		 * @global int $post_id
@@ -36,7 +42,16 @@ if ( !class_exists( 'Reactions' ) ) {
 		 */
 		public function __construct() {
 			global $post_id;
-			$this->reactions = get_post_meta( $post_id, '_cr_reactions' );
+			$this->current_post_id = $post_id;
+			$this->reactions = get_post_meta( $this->current_post_id, '_cr_reactions' );
+		}
+		
+		/**
+		 * Gets the list of reactions and their counts on a post
+		 * @return array
+		 */
+		public function get_reactions_on_post() {
+			return array_column( $this->reactions, 'name', 'count' ); //Gets the list of reactions and their counts as key-value pairs
 		}
 
 	}
