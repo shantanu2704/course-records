@@ -39,7 +39,6 @@ get_header(); ?>
 				 */
 				get_template_part( 'components/course-records/question' );
 
-
 			endwhile;
 
 			the_posts_pagination( array(
