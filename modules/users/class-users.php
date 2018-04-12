@@ -59,6 +59,21 @@ if ( !class_exists( 'Users' ) ) {
 			$this->slack_users	 = apply_filters( 'cr_slack_user_ids', $slack_users );
 			$this->slack_bots	 = apply_filters( 'cr_slack_bot_ids', $slack_bots );
 		}
+		
+		/**
+		 * Getter for $slack_bots and $slack_users
+		 * @param string $slack_id
+		 * @return string Display name
+		 */
+		public function __get( $slack_id ) {
+			if ( array_key_exists( $slack_id, $this->slack_bots) ) {
+				return $this->slack_bots[ $slack_id ];
+			}
+			if ( array_key_exists( $slack_id, $this->slack_users) ) {
+				return $this->slack_users[ $slack_id ];
+			}			
+		}
+		
 
 		/**
 		 * Replace Slack User ID with names
