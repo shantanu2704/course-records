@@ -53,6 +53,10 @@ if ( !class_exists( 'Reactions' ) ) {
 			$this->users = new Users();
 		}
 		
+		public function get_reactions() {
+			return $this->reactions;
+		}
+		
 		/**
 		 * Gets the list of reactions and their counts on a post
 		 * @return array
