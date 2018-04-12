@@ -9,10 +9,9 @@
 // If this file is called directly, abort.
 if ( !defined( 'ABSPATH' ) )	exit();
 
-if ( !class_exists( 'Reactions' ) ) {
+require get_parent_theme_file_path( '/modules/users/class-users.php' );
 
-	require get_parent_theme_file_path( '/modules/users/class-users.php' );
-	$users = new Users();
+if ( !class_exists( 'Reactions' ) ) {
 	
 	/**
 	 * Reactions
@@ -34,6 +33,13 @@ if ( !class_exists( 'Reactions' ) ) {
 		private $current_post_id;
 		
 		/**
+		 * Object of type Users
+		 * @var object  
+		 */
+		private $users;
+
+
+		/**
 		 * Constructor
 		 * 
 		 * @global int $post_id
@@ -44,6 +50,7 @@ if ( !class_exists( 'Reactions' ) ) {
 			global $post_id;
 			$this->current_post_id = $post_id;
 			$this->reactions = get_post_meta( $this->current_post_id, '_cr_reactions' );
+			$this->users = new Users();
 		}
 		
 		/**
