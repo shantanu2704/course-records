@@ -22,7 +22,7 @@
 		<?php
 			if ( 'question' === get_post_type() ) :
 				echo '<div class="entry-meta">';
-					get_template_part( 'components/post/content', 'author' );
+					get_template_part( 'components/course-records/author' );
 					if ( is_single() ) :
 						twentyseventeen_posted_on();
 					else :

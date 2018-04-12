@@ -37,7 +37,7 @@ get_header(); ?>
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 				 */
-				get_template_part( 'components/post/content', 'task' );
+				get_template_part( 'components/course-records/task' );
 
 			endwhile;
 
