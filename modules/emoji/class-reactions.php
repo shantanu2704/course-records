@@ -11,6 +11,9 @@ if ( !defined( 'ABSPATH' ) )	exit();
 
 if ( !class_exists( 'Reactions' ) ) {
 
+	require get_parent_theme_file_path( '/modules/users/class-users.php' );
+	$users = new Users();
+	
 	/**
 	 * Reactions
 	 *
@@ -24,6 +27,13 @@ if ( !class_exists( 'Reactions' ) ) {
 		 */
 		private $reactions;
 
+		/**
+		 * Constructor
+		 * 
+		 * @global int $post_id
+		 * 
+		 * @since 0.0.1
+		 */
 		public function __construct() {
 			global $post_id;
 			$this->reactions = get_post_meta( $post_id, '_cr_reactions' );
