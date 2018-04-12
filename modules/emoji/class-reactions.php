@@ -60,6 +60,17 @@ if ( !class_exists( 'Reactions' ) ) {
 		public function get_reactions_on_post() {
 			return array_column( $this->reactions, 'name', 'count' ); //Gets the list of reactions and their counts as key-value pairs
 		}
+		
+		public function get_userlist_with_reactions() {
+			$reactors = array ();
+			foreach ( $this->reactions as $reaction ) {
+				if ( $reaction[ 'name' ] != 'white_check_mark' ) {
+					$reactors[ $reaction ] = $this->users->get_names_from_slack_ids( $reaction[ 'users' ] );
+				}
+			}
+			
+			return $reactors;
+		}
 
 	}
 
