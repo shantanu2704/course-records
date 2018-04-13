@@ -126,10 +126,11 @@ if ( !class_exists( 'Users' ) ) {
 			);
 
 			foreach ( $reactions as $reaction ) {
-				if ( 'white_check_mark' === $reaction[ 'name' ] ) {					
+				if ( ( isset( $reaction[ 'name' ] ) ) && ( 'white_check_mark' === $reaction[ 'name' ] ) ) {					
 					foreach ( $reaction[ 'users' ] as $user ) {
-						$tasks[ 'complete' ][] = $this->slack_users[ $user ];
+						$tasks[ 'complete' ][] = array_key_exists($user, $this->slack_users) ? $this->slack_users[ $user ] : $this->slack_bots[ $user ];	
 					}
+					
 					$tasks[ 'incomplete' ]	 = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_users, $tasks[ 'complete' ] ) );
 				}
 			}
