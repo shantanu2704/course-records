@@ -43,6 +43,10 @@ if ( !class_exists( 'Reactions' ) ) {
 			$this->users = new Users();
 		}
 		
+		/**
+		 * Getter for reactions
+		 * @return array
+		 */
 		public function get_reactions() {
 			return $this->reactions;
 		}
@@ -55,6 +59,10 @@ if ( !class_exists( 'Reactions' ) ) {
 			return array_column( $this->reactions, 'name', 'count' ); //Gets the list of reactions and their counts as key-value pairs
 		}
 		
+		/**
+		 * Get a multidimensional array of reactions and the users who have reacted
+		 * @return array
+		 */
 		public function get_userlist_with_reactions() {
 			$reactors = array ();
 			if ( ! empty ($this->reactions ) ) {
