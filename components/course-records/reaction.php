@@ -4,7 +4,6 @@
  * @since 0.0.1
  */
 require get_parent_theme_file_path( '/inc/template-utilities.php' );
-$user_list_for_checkmarks		 = get_list_of_users_for_task();
 $user_list_for_other_reactions	 = get_user_list_for_other_reactions();
 ?>
 <div class="cr-reactions" id="cr-reactions" >
