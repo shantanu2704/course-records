@@ -6,13 +6,17 @@ require get_parent_theme_file_path( '/modules/emoji/class-reactions.php' );
 if ( !function_exists( 'get_reactions_on_post' ) ) {
 
 	function get_reactions_on_post() {
-		$reaction	 = new Reactions();
-		$reactions = array();	 
-		$reactions = $reaction->get_reactions_on_post();
-		if ( ! empty( $reactions ) ) {
-			foreach ( $reactions as $reaction_count => $reaction_name ) {
-				echo "<li> :" . $reaction_name . ":" . " - " . $reaction_count . " </li>";
+		$reaction = new Reactions();
+		$reactions = $reaction->get_reactions();
+		if ( is_array( $reactions ) && !empty( $reactions ) ) {
+			$reactions_col = $reaction->get_reactions_on_post();
+			if ( !empty( $reactions_col ) ) {
+				foreach ( $reactions_col as $reaction_count => $reaction_name ) {
+					echo "<li> :" . $reaction_name . ":" . " - " . $reaction_count . " </li>";
+				}
 			}
+		} else {
+			echo "None";
 		}
 	}
 
