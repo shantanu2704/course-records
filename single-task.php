@@ -21,7 +21,7 @@ get_header();
 			while ( have_posts() ) : the_post();
 
 				get_template_part( 'components/course-records/task' );
-				get_template_part( 'components/course-records/reaction' );
+				get_template_part( 'components/course-records/reaction', 'task' );
 				
 				// If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || get_comments_number() ) :
