@@ -24,7 +24,7 @@ if ( !class_exists( 'Reactions' ) ) {
 		 *
 		 * @var array Array to store reactions on a post 
 		 */
-		private $reactions;
+		private $reactions = array();
 
 		/**
 		 * The current post ID
@@ -48,8 +48,10 @@ if ( !class_exists( 'Reactions' ) ) {
 		 */
 		public function __construct() {
 			global $post_id;
-			$this->current_post_id = $post_id;
-			$this->reactions = get_post_meta( $this->current_post_id, '_cr_reactions' );
+			$reactions = get_post_meta( $post_id, '_cr_reactions', true );
+			print_r( "Reactions are: ---------------------------------------------------------" );
+			print_r( $reactions );
+//			wp_die();
 			$this->users = new Users();
 		}
 		
@@ -67,12 +69,14 @@ if ( !class_exists( 'Reactions' ) ) {
 		
 		public function get_userlist_with_reactions() {
 			$reactors = array ();
-			foreach ( $this->reactions as $reaction ) {
-				if ( $reaction[ 'name' ] != 'white_check_mark' ) {
-					$reactors[ $reaction ] = $this->users->get_names_from_slack_ids( $reaction[ 'users' ] );
+			if ( !$this->reactions ) {
+				foreach ( $this->reactions as $reaction ) {
+					if ( $reaction[ 'name' ] != 'white_check_mark' ) {
+						$reactors[ $reaction ] = $this->users->get_names_from_slack_ids( $reaction[ 'users' ] );
+					}
 				}
 			}
-			
+
 			return $reactors;
 		}
 
