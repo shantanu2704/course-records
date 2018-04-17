@@ -469,3 +469,11 @@ require get_parent_theme_file_path( '/modules/emoji/class-emoji.php' );
 $emoji = new Emoji();
 $emoji->init();
 
+
+function cr_date_archive_post_types( $query ){
+//    if( $query->is_main_query() && ( $query->is_date() || $query->is_day() ) ):
+	if( $query->is_main_query() && $query->is_date() ):
+        $query->set( 'post_type', array( 'message', 'task', 'question' ) );
+    endif;
+}
+add_action( 'pre_get_posts', 'cr_date_archive_post_types' );
