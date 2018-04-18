@@ -23,12 +23,8 @@
 			if ( 'question' === get_post_type() ) :
 				echo '<div class="entry-meta">';
 					get_template_part( 'components/course-records/author' );
-					if ( is_single() ) :
-						twentyseventeen_posted_on();
-					else :
-						echo twentyseventeen_time_link();
-						twentyseventeen_edit_link();
-					endif;
+					twentyseventeen_posted_on();
+					twentyseventeen_edit_link();
 				echo '</div><!-- .entry-meta -->';
 			endif;
 
