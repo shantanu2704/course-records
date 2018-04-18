@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;;;;;;;;;;;;;;EAcE;AAEF,oBAAqB;EACjB,OAAO,EAAE,YAAY;EACrB,KAAK,EAAE,KAAK;;;AAGhB,OAAQ;EACJ,KAAK,EAAE,IAAI;EACX,KAAK,EAAE,GAAG",
+"sources": ["sass/slack-style.scss"],
+"names": [],
+"file": "slack-style.css"
+}
