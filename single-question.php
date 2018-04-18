@@ -20,8 +20,8 @@ get_header();
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();
 
-				get_template_part( 'components/post/content', 'question' );
-				get_template_part( 'components/post/content', 'reaction' );
+				get_template_part( 'components/course-records/question' );
+				get_template_part( 'components/course-records/reaction' );
 
 				// If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || get_comments_number() ) :

@@ -59,6 +59,21 @@ if ( !class_exists( 'Users' ) ) {
 			$this->slack_users	 = apply_filters( 'cr_slack_user_ids', $slack_users );
 			$this->slack_bots	 = apply_filters( 'cr_slack_bot_ids', $slack_bots );
 		}
+		
+		/**
+		 * Getter for $slack_bots and $slack_users
+		 * @param string $slack_id
+		 * @return string Display name
+		 */
+		public function __get( $slack_id ) {
+			if ( array_key_exists( $slack_id, $this->slack_bots) ) {
+				return $this->slack_bots[ $slack_id ];
+			}
+			if ( array_key_exists( $slack_id, $this->slack_users) ) {
+				return $this->slack_users[ $slack_id ];
+			}			
+		}
+		
 
 		/**
 		 * Replace Slack User ID with names
@@ -111,10 +126,11 @@ if ( !class_exists( 'Users' ) ) {
 			);
 
 			foreach ( $reactions as $reaction ) {
-				if ( 'white_check_mark' === $reaction[ 'name' ] ) {					
+				if ( ( isset( $reaction[ 'name' ] ) ) && ( 'white_check_mark' === $reaction[ 'name' ] ) ) {					
 					foreach ( $reaction[ 'users' ] as $user ) {
-						$tasks[ 'complete' ][] = $this->slack_users[ $user ];
+						$tasks[ 'complete' ][] = array_key_exists($user, $this->slack_users) ? $this->slack_users[ $user ] : $this->slack_bots[ $user ];	
 					}
+					
 					$tasks[ 'incomplete' ]	 = array_merge( $tasks[ 'incomplete' ], array_diff( $this->slack_users, $tasks[ 'complete' ] ) );
 				}
 			}
@@ -141,6 +157,14 @@ if ( !class_exists( 'Users' ) ) {
 					} // foreach ( $reactions[ 'users' ] as $user )
 				} // if ( 'white_check_mark' === $reaction[ name ] ) 
 			} // foreach ( $reactions as $reaction )
+		}
+		
+		public function get_names_from_slack_ids( $slack_ids ) {
+			$names = array();
+			foreach ( $slack_ids as $slack_id ) {
+				$names[] = $this->__get( $slack_id );
+			}
+			return $names;
 		}
 
 	}
