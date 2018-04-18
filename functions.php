@@ -477,3 +477,10 @@ function cr_date_archive_post_types( $query ){
     endif;
 }
 add_action( 'pre_get_posts', 'cr_date_archive_post_types' );
+
+/** 	
+ * Slack CSS
+ */
+require get_parent_theme_file_path( '/modules/slack-css/class-slack-css.php' );
+$slack = new Slack_CSS();
+$slack->init();
