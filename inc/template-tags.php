@@ -17,7 +17,7 @@ function twentyseventeen_posted_on() {
 
 	// Get the author name; wrap it in a link.
 	$byline = sprintf(
-		_x( 'by %s', 'post author', 'twentyseventeen' ),
+		_x( '%s', 'post author', 'twentyseventeen' ),
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . get_the_author() . '</a></span>'
 	);
 
