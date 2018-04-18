@@ -17,7 +17,15 @@ if ( !class_exists( 'Slack_CSS' ) ) {
 	 * @since 0.0.1
 	 */
 	class Slack_CSS {
-		
+		/**
+		 * Initialse this class
+		 * 
+		 * @since 0.0.1
+		 */
+		public function init() {
+
+			add_action( 'wp_enqueue_scripts', array( $this, 'slack_style' ) );
+		}
 	}
 
 }
