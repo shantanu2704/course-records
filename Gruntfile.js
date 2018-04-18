@@ -17,7 +17,7 @@ module.exports = function( grunt ) {
 					style: 'expanded'
 				},
 				files: {
-					'style.css': 'sass/style.scss',
+					'slack-style.css': 'sass/slack-style.scss',
 				}
 			},
 			release: {
@@ -25,7 +25,7 @@ module.exports = function( grunt ) {
 					style: 'expanded'
 				},
 				files: {
-					'style.css': 'sass/style.scss',
+					'slack-style.css': 'sass/slack-style.scss',
 				}
 			}
 		},
@@ -34,8 +34,8 @@ module.exports = function( grunt ) {
 				browsers: [ '> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie 9' ]
 			},
 			single_file: {
-				src: 'style.css',
-				dest: 'style.css'
+				src: 'slack-style.css',
+				dest: 'slack-style.css'
 			}
 		},
 		csscomb: {
@@ -43,7 +43,7 @@ module.exports = function( grunt ) {
 				config: '.csscomb.json'
 			},
 			files: {
-				'style.css': [ 'style.css' ],
+				'slack-style.css': [ 'slack-style.css' ],
 			}
 		},
 		concat: {
