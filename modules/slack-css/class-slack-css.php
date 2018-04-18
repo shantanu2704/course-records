@@ -28,7 +28,7 @@ if ( !class_exists( 'Slack_CSS' ) ) {
 		}
 		
 		public function slack_style() {
-			$style_src = get_parent_theme_file_uri() . 'sass/slack-style.css';
+			$style_src = get_parent_theme_file_uri( 'slack-style.css' );
 			wp_enqueue_style( 'slack_style', $style_src );
 		}
 
