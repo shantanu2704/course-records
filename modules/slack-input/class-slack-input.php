@@ -42,7 +42,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 * Initialise the class
 		 *
 		 * @since 0.0.1
-		 *
+		 */
 		function init() {
 			// Hook into this action to add an extra submenu.
 			add_action( 'admin_menu', array( $this, 'add_input_page' ) );
