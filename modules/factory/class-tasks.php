@@ -73,7 +73,8 @@ if ( ! class_exists( 'Tasks' ) ) {
 
 		/**
 		 * Add meta data to the post
-		 * @param int $task_id Task ID
+		 * 
+		 * @param int $task_id Task ID.
 		 */
 		public function add_task_meta( $task_id ) {
 			foreach ( $this->content as $key => $value ) {
