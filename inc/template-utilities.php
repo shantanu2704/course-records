@@ -2,6 +2,7 @@
 /**
  * Additional utility functions for the templates
  *
+ * @author Shantanu Desai <shantanu2846@gmail.com>
  * @package course-records
  * @since 0.0.1
  */
