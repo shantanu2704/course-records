@@ -23,7 +23,8 @@ if ( ! class_exists( 'Tasks' ) ) {
 		/**
 		 * Associative multidimensional array to store message content
 		 *
-		 * @var array Message Content 
+		 * @var array Message Content
+		 * @since 0.0.1
 		 */
 		private $content;
 
