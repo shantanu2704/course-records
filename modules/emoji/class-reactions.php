@@ -4,7 +4,7 @@
  *
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
- * @package 0.0.1
+ * @package course-records
  */
 
 // If this file is called directly, abort.
