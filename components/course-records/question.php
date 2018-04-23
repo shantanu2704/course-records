@@ -15,7 +15,7 @@
 		echo twentyseventeen_get_svg( array(
 			'icon' => 'pinned',
 		)
-			);
+		);
 	endif;
 	?>
 	<header class="entry-header">
