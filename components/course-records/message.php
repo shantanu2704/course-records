@@ -2,12 +2,9 @@
 /**
  * Template part for displaying messages
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.0
+ * @author Shantanu Desai <shantanu2846@gmail.com>
+ * @since 0.0.1 
+ * @package course-records
  */
 
 ?>
