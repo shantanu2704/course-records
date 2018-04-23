@@ -23,7 +23,7 @@ if ( ! class_exists( 'Post_Factory' ) ) {
 
 		/**
 		 * Instantiate the appropriate class
-		 * 
+		 *
 		 * @param array $content JSON of a message converted to an array.
 		 * @param array $post_type Post type.
 		 * @param array $post_id Post ID.

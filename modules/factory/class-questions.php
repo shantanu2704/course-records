@@ -59,7 +59,7 @@ if ( ! class_exists( 'Questions' ) ) {
 			$my_question = array(
 				'post_author' => $user_id,
 				'post_date' => date( 'Y-m-d H:i:s', $ts ),
-				'post_content' => $this->content[ 'text' ],
+				'post_content' => $this->content['text'],
 				'post_status' => 'publish',
 				'post_type' => 'question',
 				'comment_status' => 'open',
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Questions' ) ) {
 		/**
 		 * Add meta data to the post
 		 *
-		 * @param int $question_id Task ID
+		 * @param int $question_id Task ID.
 		 */
 		public function add_question_meta( $question_id ) {
 			foreach ( $this->content as $key => $value ) {

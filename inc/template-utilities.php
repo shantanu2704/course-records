@@ -66,7 +66,7 @@ if ( ! function_exists( 'user_list_complete_task' ) ) {
 	/**
 	 * Function to print a list of users who have completed  a task
 	 *
-	 * @param array $user_list_for_completed_task Users who have completed  a task
+	 * @param array $user_list_for_completed_task Users who have completed  a task.
 	 */
 	function user_list_complete_task( $user_list_for_completed_task ) {
 		if ( ! empty( $user_list_for_completed_task ) ) {
@@ -82,7 +82,7 @@ if ( ! function_exists( 'user_list_incomplete_task' ) ) {
 	/**
 	 * Function to print a list of users who haven't completed  a task
 	 *
-	 * @param array $user_list_for_incomplete_task Users who haven't completed the task
+	 * @param array $user_list_for_incomplete_task Users who haven't completed the task.
 	 */
 	function user_list_incomplete_task( $user_list_for_incomplete_task ) {
 		if ( ! empty( $user_list_for_incomplete_task ) ) {
@@ -98,7 +98,7 @@ if ( ! function_exists( 'print_user_list_for_other_reactions' ) ) {
 	/**
 	 * Print the user list for other reactions
 	 *
-	 * @param array $user_list List of users
+	 * @param array $user_list List of users.
 	 */
 	function print_user_list_for_other_reactions( $user_list ) {
 		foreach ( $user_list as $key => $value ) {

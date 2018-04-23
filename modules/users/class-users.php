@@ -5,7 +5,6 @@
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
  * @package course-records
- *
  */
 
 // If this file is called directly, abort.
@@ -93,7 +92,7 @@ if ( ! class_exists( 'Users' ) ) {
 
 		/**
 		 * Replace Slack Bot ID with names
-		 * 
+		 *
 		 * @param mixed $content String/Array to be searched.
 		 */
 		public function replace_slack_bot_id_with_names( $content ) {
@@ -136,9 +135,9 @@ if ( ! class_exists( 'Users' ) ) {
 			);
 
 			foreach ( $reactions as $reaction ) {
-                                   if ( ( isset( $reaction['name'] ) ) && ( 'white_check_mark' === $reaction['name'] ) ) {
+				if ( ( isset( $reaction['name'] ) ) && ( 'white_check_mark' === $reaction['name'] ) ) {
 					foreach ( $reaction['users'] as $user ) {
-					        $tasks['complete'][] = array_key_exists( $user, $this->slack_users ) ? $this->slack_users[ $user ] : $this->slack_bots[ $user ];	
+						$tasks['complete'][] = array_key_exists( $user, $this->slack_users ) ? $this->slack_users[ $user ] : $this->slack_bots[ $user ];
 					}
 
 					$tasks['incomplete'] = array_merge( $tasks['incomplete'], array_diff( $this->slack_users, $tasks['complete'] ) );

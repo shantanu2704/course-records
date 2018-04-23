@@ -143,7 +143,7 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_in_menu' => true,
 				'query_var' => true,
 				'rewrite' => array(
-					'slug' => 'task'
+					'slug' => 'task',
 				),
 				'capability_type' => 'post',
 				'has_archive' => true,
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_in_menu' => true,
 				'query_var' => true,
 				'rewrite' => array(
-					'slug' => 'question'
+					'slug' => 'question',
 				),
 				'capability_type' => 'post',
 				'has_archive' => true,
@@ -239,7 +239,7 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_in_menu' => true,
 				'query_var' => true,
 				'rewrite' => array(
-					'slug' => 'message'
+					'slug' => 'message',
 				),
 				'capability_type' => 'post',
 				'has_archive' => true,
@@ -287,7 +287,7 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_in_menu' => true,
 				'query_var' => true,
 				'rewrite' => array(
-					'slug' => 'report'
+					'slug' => 'report',
 				),
 				'capability_type' => 'post',
 				'has_archive' => true,

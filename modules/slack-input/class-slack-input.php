@@ -8,8 +8,9 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) )
+if ( ! defined( 'ABSPATH' ) ) {
 	exit();
+}
 
 if ( ! class_exists( 'Slack_Input' ) ) {
 
@@ -78,7 +79,7 @@ if ( ! class_exists( 'Slack_Input' ) ) {
 			$files = array();
 
 			// Loop over the directory.
-			while ( ($entry = readdir( $contents ) ) !== false ) {
+			while ( false !== ($entry = readdir( $contents ) ) ) {
 				// Check if current item is a file.
 				if ( is_file( $upload_dir . $entry ) ) {
 					// If yes, push it on to the list of files.

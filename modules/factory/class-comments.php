@@ -81,7 +81,7 @@ if ( ! class_exists( 'Comments' ) ) {
 		/**
 		 * Add meta data
 		 *
-		 * @param int $comment_id Comment ID
+		 * @param int $comment_id Comment ID.
 		 * @since 0.0.1
 		 */
 		public function add_comment_meta( $comment_id ) {
