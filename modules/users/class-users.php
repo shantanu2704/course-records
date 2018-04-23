@@ -7,6 +7,7 @@
  * @package course-records
  *
  */
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
@@ -68,8 +69,8 @@ if ( ! class_exists( 'Users' ) ) {
 		/**
 		 * Getter for $slack_bots and $slack_users
 		 *
-		 * @param string $slack_id
-		 * @return string Display name
+		 * @param string $slack_id Slack ID.
+		 * @return string Display name.
 		 */
 		public function __get( $slack_id ) {
 			if ( array_key_exists( $slack_id, $this->slack_bots ) ) {
@@ -80,10 +81,9 @@ if ( ! class_exists( 'Users' ) ) {
 			}
 		}
 
-		
 		/**
 		 * Replace Slack User ID with names
-		 * 
+		 *
 		 * @param mixed $content String/Array to be searched.
 		 */
 		public function replace_slack_user_id_with_names( $content ) {
@@ -102,9 +102,9 @@ if ( ! class_exists( 'Users' ) ) {
 
 		/**
 		 * Get WordPress user object from Slack ID
-		 * 
-		 * @param int $slack_id
-		 * @return array WordPress user objects
+		 *
+		 * @param int $slack_id Slack ID.
+		 * @return array WordPress user objects.
 		 */
 		public function get_user_from_slack_id( $slack_id ) {
 			$user_object = '';
@@ -127,7 +127,7 @@ if ( ! class_exists( 'Users' ) ) {
 		 * @param array $reactions Multidimensional array of reactions with users.
 		 * @return array A multidimensional array with a list of users who have
 		 *                          completed the task and are yet to complete the task with
-		 *                          keys - 'complete' and 'incomplete'
+		 *                          keys - 'complete' and 'incomplete'.
 		 */
 		public function get_user_list_for_task( $reactions ) {
 			$tasks = array(
@@ -136,9 +136,9 @@ if ( ! class_exists( 'Users' ) ) {
 			);
 
 			foreach ( $reactions as $reaction ) {
-				if ( ( isset( $reaction['name'] ) ) && ( 'white_check_mark' === $reaction['name'] ) ) {					
+                                   if ( ( isset( $reaction['name'] ) ) && ( 'white_check_mark' === $reaction['name'] ) ) {
 					foreach ( $reaction['users'] as $user ) {
-						$tasks['complete'][] = array_key_exists( $user, $this->slack_users ) ? $this->slack_users[ $user ] : $this->slack_bots[ $user ];	
+					        $tasks['complete'][] = array_key_exists( $user, $this->slack_users ) ? $this->slack_users[ $user ] : $this->slack_bots[ $user ];	
 					}
 
 					$tasks['incomplete'] = array_merge( $tasks['incomplete'], array_diff( $this->slack_users, $tasks['complete'] ) );
@@ -150,9 +150,9 @@ if ( ! class_exists( 'Users' ) ) {
 
 		/**
 		 * Add reaction to user meta
-		 * 
-		 * @param string  $task Task
-		 * @param array  $reactions Multidimensional array of reactions with users.
+		 *
+		 * @param string $task Task.
+		 * @param array $reactions Multidimensional array of reactions with users.
 		 */
 		public function add_reaction_to_user_meta( $task, $reactions ) {
 
@@ -173,8 +173,8 @@ if ( ! class_exists( 'Users' ) ) {
 		/**
 		 * Get names from Slack IDs
 		 *
-		 * @param array  $slack_ids Slack IDs
-		 * @return array User names 
+		 * @param array $slack_ids Slack IDs.
+		 * @return array User names.
 		 */
 		public function get_names_from_slack_ids( $slack_ids ) {
 			$names = array();
