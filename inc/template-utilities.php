@@ -37,7 +37,7 @@ if ( ! function_exists( 'get_list_of_users_for_task' ) ) {
 	/**
 	 * Wrapper function to get a list of users who have and haven't completed a task
 	 *
-	 * @return array 
+	 * @return array Lists of users
 	 */
 	function get_list_of_users_for_task() {
 		$reaction = new Reactions();
@@ -53,13 +53,12 @@ if ( ! function_exists( 'get_user_list_for_other_reactions' ) ) {
 	/**
 	 * Wrapper function to get a list of users and reactions
 	 *
-	 * @return array
+	 * @return array Users and reactions
 	 */
 	function get_user_list_for_other_reactions() {
 		$reaction = new Reactions();
 		return $reaction->get_userlist_with_reactions();
 	}
-
 }
 
 if ( ! function_exists( 'user_list_complete_task' ) ) {
@@ -67,7 +66,7 @@ if ( ! function_exists( 'user_list_complete_task' ) ) {
 	/**
 	 * Function to print a list of users who have completed  a task
 	 *
-	 * @param array $user_list_for_completed_task
+	 * @param array $user_list_for_completed_task Users who have completed  a task
 	 */
 	function user_list_complete_task( $user_list_for_completed_task ) {
 		if ( ! empty( $user_list_for_completed_task ) ) {
@@ -83,7 +82,7 @@ if ( ! function_exists( 'user_list_incomplete_task' ) ) {
 	/**
 	 * Function to print a list of users who haven't completed  a task
 	 *
-	 * @param array $user_list_for_incomplete_task
+	 * @param array $user_list_for_incomplete_task Users who haven't completed the task
 	 */
 	function user_list_incomplete_task( $user_list_for_incomplete_task ) {
 		if ( ! empty( $user_list_for_incomplete_task ) ) {
@@ -99,7 +98,7 @@ if ( ! function_exists( 'print_user_list_for_other_reactions' ) ) {
 	/**
 	 * Print the user list for other reactions
 	 *
-	 * @param array $user_list
+	 * @param array $user_list List of users
 	 */
 	function print_user_list_for_other_reactions( $user_list ) {
 		foreach ( $user_list as $key => $value ) {
@@ -107,11 +106,10 @@ if ( ! function_exists( 'print_user_list_for_other_reactions' ) ) {
 			echo '\t <ul> \n';
 			if ( ! empty( $user_list[ $key ] ) ) {
 				foreach ( $user_list[ $key ] as $user ) {
-					echo '<li>' .  $user . '</li> \n';
+					echo '<li>' . $user . '</li> \n';
 				}
 			}
 			echo '</ul> \n';
 		}
 	}
-
 }
