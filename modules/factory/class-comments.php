@@ -5,7 +5,6 @@
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
  * @package course-records
- * 
  */
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -39,9 +38,9 @@ if ( ! class_exists( 'Comments' ) ) {
 
 		/**
 		 * Constructor
-		 * 
-		 * @param array  $json_input Decoded JSON input array for a message.
-		 * @param int  $parent_post_id ID of the parent post.
+		 *
+		 * @param array $json_input Decoded JSON input array for a message.
+		 * @param int $parent_post_id ID of the parent post.
 		 * @since 0.0.1
 		 */
 		public function __construct( $json_input, $parent_post_id ) {
@@ -51,7 +50,7 @@ if ( ! class_exists( 'Comments' ) ) {
 
 		/**
 		 * Add new comment to a post
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		public function add_comments() {
@@ -66,13 +65,13 @@ if ( ! class_exists( 'Comments' ) ) {
 			}
 
 			// Create post object.
-			$my_comment	 = array(
+			$my_comment = array(
 				'comment_date' => date( 'Y-m-d H:i:s', $ts ),
 				'comment_content' => $this->content['text'],
 				'comment_post_ID' => $this->parent_id,
 				'user_id' => $user_id,
 			);
-			
+
 			// Insert post into database.
 			$comment_id = wp_insert_comment( $my_comment );
 			$this->add_comment_meta( $comment_id );
@@ -80,13 +79,13 @@ if ( ! class_exists( 'Comments' ) ) {
 
 		/**
 		 * Add meta data
-		 * 
-		 * @param int $comment_id
+		 *
+		 * @param int $comment_id Comment ID
 		 * @since 0.0.1
 		 */
 		public function add_comment_meta( $comment_id ) {
 			foreach ( $this->content as $key => $value ) {
-				add_comment_meta( $comment_id, '_cr_' . $key, $value);
+				add_comment_meta( $comment_id, '_cr_' . $key, $value );
 			}
 		}
 
