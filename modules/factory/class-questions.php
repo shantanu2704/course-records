@@ -5,10 +5,10 @@
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
  * @package course-records
- * 
  */
+
 // If this file is called directly, abort.
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
@@ -24,13 +24,13 @@ if ( ! class_exists( 'Questions' ) ) {
 		/**
 		 * Associative multidimensional array to store message content
 		 *
-		 * @var array Message Content 
+		 * @var array Message Content
 		 */
 		private $content;
 
 		/**
 		 * Constructor
-		 * 
+		 *
 		 * @param array $json_input Decoded JSON input array for a question.
 		 * @since 0.0.1
 		 */
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Questions' ) ) {
 
 		/**
 		 * Add a new question
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		public function add_question() {
@@ -58,10 +58,10 @@ if ( ! class_exists( 'Questions' ) ) {
 			// Create post object.
 			$my_question = array(
 				'post_author' => $user_id,
-				'post_date'	=> date( 'Y-m-d H:i:s', $ts ),
+				'post_date' => date( 'Y-m-d H:i:s', $ts ),
 				'post_content' => $this->content[ 'text' ],
 				'post_status' => 'publish',
-				'post_type'	=> 'question',
+				'post_type' => 'question',
 				'comment_status' => 'open',
 			);
 			// Insert post into database.
@@ -71,7 +71,8 @@ if ( ! class_exists( 'Questions' ) ) {
 
 		/**
 		 * Add meta data to the post
-		 * @param int $task_id Task ID
+		 *
+		 * @param int $question_id Task ID
 		 */
 		public function add_question_meta( $question_id ) {
 			foreach ( $this->content as $key => $value ) {
