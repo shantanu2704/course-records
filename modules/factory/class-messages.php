@@ -5,8 +5,8 @@
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
  * @package course-records
- * 
  */
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
@@ -24,27 +24,27 @@ if ( ! class_exists( 'Messages' ) ) {
 		/**
 		 * Multidimensional associative array containing Slack messages
 		 *
-		 * @var array 
+		 * @var array
 		 */
 		private $content;
 
 		/**
 		 * Whether the current message is part of a thread
 		 *
-		 * @var bool  
+		 * @var bool
 		 */
 		private $thread;
 
 		/**
 		 * Was the current message broadcast
 		 *
-		 * @var bool 
+		 * @var bool
 		 */
 		private $broadcast;
 
 		/**
 		 * Constructor
-		 * 
+		 *
 		 * @param array $json_input Decoded JSON input array for a message.
 		 * @param bool  $is_thread Is the current message part of a thread.
 		 * @param bool  $was_broadcasted Was the current message broadcasted.
@@ -72,8 +72,8 @@ if ( ! class_exists( 'Messages' ) ) {
 			// Create post object.
 			$my_message = array(
 				'post_author' => $user_id,
-				'post_date'	=> date( 'Y-m-d H:i:s', $ts ),
-				'post_content' => $this->content[ 'text' ],
+				'post_date' => date( 'Y-m-d H:i:s', $ts ),
+				'post_content' => $this->content['text'],
 				'post_status' => 'publish',
 				'post_type' => 'message',
 				'comment_status' => 'open',
@@ -86,7 +86,7 @@ if ( ! class_exists( 'Messages' ) ) {
 
 		/**
 		 * Add meta data to the post
-		 * 
+		 *
 		 * @param int $message_id Message ID.
 		 */
 		public function add_message_meta( $message_id ) {

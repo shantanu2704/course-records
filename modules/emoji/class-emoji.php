@@ -6,6 +6,7 @@
  * @since 0.0.1
  * @package course-records
  */
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
