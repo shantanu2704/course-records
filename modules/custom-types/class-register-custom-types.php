@@ -5,7 +5,6 @@
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
  * @package course-records
- * 
  */
 
 // If this file is called directly, abort.
@@ -24,7 +23,7 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 
 		/**
 		 * Initialise the class
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		public function init() {
@@ -50,11 +49,11 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 		/**
 		 * Register the custom taxonomy - 'User'
 		 *
-		 * @since 0.0.1 
+		 * @since 0.0.1
 		 */
 		public function register_user_taxonomy() {
 
-			// Define all the lables for the custom taxonomy
+			// Define all the lables for the custom taxonomy.
 			$labels = array(
 				'name' => 'Users',
 				'singular_name' => 'User',
@@ -78,25 +77,25 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'User',                                                    // taxonomy key.
 				'post',                                                    // object type.
 				array(                                                    // args.
-					'label'                    => __( 'User' ),
-					'hierarchical'         => false,
-					'labels'                  => $labels,
-					)
+					'label' => __( 'User' ),
+					'hierarchical' => false,
+					'labels' => $labels,
+				)
 			);
 		}
 
 		/**
 		 * Fetch all the users on the side and add their usernames as 'terms' of the
 		 * 'User' taxonomy
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		public function add_users_to_taxonomy() {
 
 			// Fetch a list of all usernames.
-			$blogusers = get_users( array( 
+			$blogusers = get_users( array(
 				'fields' => array( 'user_login' ),
-				)
+			)
 			);
 
 			foreach ( $blogusers as $user ) {
@@ -119,7 +118,7 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 
 			// Define labels for CPT - Task.
 			$labels = array(
-				'name'=> __( 'Tasks', 'twentyseventeen' ),
+				'name' => __( 'Tasks', 'twentyseventeen' ),
 				'singular_name' => __( 'Task', 'twentyseventeen' ),
 				'menu_name' => __( 'Tasks', 'twentyseventeen' ),
 				'name_admin_bar' => __( 'Task', 'twentyseventeen' ),
@@ -143,7 +142,9 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_ui' => true,
 				'show_in_menu' => true,
 				'query_var' => true,
-				'rewrite' => array( 'slug' => 'task' ),
+				'rewrite' => array(
+					'slug' => 'task'
+				),
 				'capability_type' => 'post',
 				'has_archive' => true,
 				'hierarchical' => false,
@@ -162,7 +163,7 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 		 * @since 0.0.1
 		 */
 		function register_question_post_type() {
-			
+
 			// Define labels for CPT - Question.
 			$labels = array(
 				'name' => __( 'Questions', 'twentyseventeen' ),
@@ -171,14 +172,14 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'name_admin_bar' => __( 'Question', 'twentyseventeen' ),
 				'add_new' => __( 'Add New', 'twentyseventeen' ),
 				'add_new_item' => __( 'Add New Question', 'twentyseventeen' ),
-				'new_item'=> __( 'New Question', 'twentyseventeen' ),
+				'new_item' => __( 'New Question', 'twentyseventeen' ),
 				'edit_item' => __( 'Edit Question', 'twentyseventeen' ),
 				'view_item' => __( 'View Question', 'twentyseventeen' ),
 				'all_items' => __( 'All Questions', 'twentyseventeen' ),
 				'search_items' => __( 'Search Questions', 'twentyseventeen' ),
 				'parent_item_colon' => __( 'Parent Questions:', 'twentyseventeen' ),
 				'not_found' => __( 'No questions found.', 'twentyseventeen' ),
-				'not_found_in_trash' => __( 'No questions found in Trash.', 'twentyseventeen' )
+				'not_found_in_trash' => __( 'No questions found in Trash.', 'twentyseventeen' ),
 			);
 
 			// Define arguments for CPT - Question.
@@ -189,8 +190,10 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_ui' => true,
 				'show_in_menu' => true,
 				'query_var' => true,
-				'rewrite' => array( 'slug' => 'question' ),
-				'capability_type'	 => 'post',
+				'rewrite' => array(
+					'slug' => 'question'
+				),
+				'capability_type' => 'post',
 				'has_archive' => true,
 				'hierarchical' => false,
 				'menu_position' => null,
@@ -204,11 +207,11 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 
 		/**
 		 * Register custom post type - Message
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		function register_message_post_type() {
-			
+
 			// Define labels for CPT - Message.
 			$labels = array(
 				'name' => __( 'Messages', 'twentyseventeen' ),
@@ -235,7 +238,9 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_ui' => true,
 				'show_in_menu' => true,
 				'query_var' => true,
-				'rewrite' => array( 'slug' => 'message' ),
+				'rewrite' => array(
+					'slug' => 'message'
+				),
 				'capability_type' => 'post',
 				'has_archive' => true,
 				'hierarchical' => false,
@@ -247,10 +252,10 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 			// Register custom post type.
 			register_post_type( 'message', $args );
 		}
-		
+
 		/**
 		 * Register custom post type - Report
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		function register_report_post_type() {
@@ -281,7 +286,9 @@ if ( ! class_exists( 'Register_Custom_Types' ) ) {
 				'show_ui' => true,
 				'show_in_menu' => true,
 				'query_var' => true,
-				'rewrite' => array( 'slug' => 'report' ),
+				'rewrite' => array(
+					'slug' => 'report'
+				),
 				'capability_type' => 'post',
 				'has_archive' => true,
 				'hierarchical' => false,
