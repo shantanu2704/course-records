@@ -3,9 +3,10 @@
  * The template for displaying archive message pages
 
  * @author Shantanu Desai <shantanu2846@gmail.com>
- * @since 0.0.1 
+ * @since 0.0.1
  * @package course-records
  */
+
 get_header(); ?>
 
 <div class="wrap">
@@ -23,7 +24,7 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 
 		<?php
-		if ( have_posts() ) : 
+		if ( have_posts() ) :
 		?>
 			<?php
 			/* Start the Loop */
@@ -40,12 +41,14 @@ get_header(); ?>
 			endwhile;
 
 			the_posts_pagination( array(
-				'prev_text' => twentyseventeen_get_svg( array( 
+				'prev_text' => twentyseventeen_get_svg( array(
 					'icon' => 'previous',
-					) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
+				)
+				) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
 				'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array(
 					'icon' => 'next',
-					) ),
+				)
+				),
 				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
 			) );
 
