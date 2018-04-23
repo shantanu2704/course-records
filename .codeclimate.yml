@@ -2,4 +2,4 @@ plugins:
   phpcodesniffer:
     enabled: true
     config:
-      standard: "WordPress-Extra,WordPress-Docs"
+      standard: "WordPress-Core,WordPress-Docs"
