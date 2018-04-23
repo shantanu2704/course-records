@@ -2,10 +2,9 @@
 /**
  * The template for displaying archive task pages
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
+ * @author Shantanu Desai <shantanu2846@gmail.com>
+ * @since 0.0.1 
  * @package course-records
- * @since 0.0.1
  */
 
 get_header(); ?>

@@ -1,13 +1,11 @@
 <?php
 /**
  * The template for displaying archive message pages
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package course-records
- * @since 0.0.1
- */
 
+ * @author Shantanu Desai <shantanu2846@gmail.com>
+ * @since 0.0.1 
+ * @package course-records
+ */
 get_header(); ?>
 
 <div class="wrap">
