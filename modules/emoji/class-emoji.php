@@ -5,7 +5,6 @@
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
  * @package course-records
- * 
  */
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -34,7 +33,7 @@ if ( ! class_exists( 'Emoji' ) ) {
 		/**
 		 * Enqueue the styles and scripts for emojis
 		 * Library - https://github.com/emojione/emojify.js
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		public function enqueue_emoji_styles_and_scripts() {
