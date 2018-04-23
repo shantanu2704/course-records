@@ -6,6 +6,7 @@
  * @since 0.0.1
  * @package course-records
  */
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
@@ -30,7 +31,7 @@ if ( ! class_exists( 'Tasks' ) ) {
 
 		/**
 		 * Constructor
-		 * 
+		 *
 		 * @param array $json_input Decoded JSON input array for a task.
 		 * @since 0.0.1
 		 */
@@ -40,7 +41,7 @@ if ( ! class_exists( 'Tasks' ) ) {
 
 		/**
 		 * Add a new task
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		public function add_task() {
@@ -61,7 +62,7 @@ if ( ! class_exists( 'Tasks' ) ) {
 			$my_task = array(
 				'post_author' => $user_id,
 				'post_date' => date( 'Y-m-d H:i:s', $ts ),
-				'post_content' => $this->content[ 'text' ],
+				'post_content' => $this->content['text'],
 				'post_status' => 'publish',
 				'post_type' => 'task',
 				'comment_status' => 'open',
@@ -74,7 +75,7 @@ if ( ! class_exists( 'Tasks' ) ) {
 
 		/**
 		 * Add meta data to the post
-		 * 
+		 *
 		 * @param int $task_id Task ID.
 		 */
 		public function add_task_meta( $task_id ) {
