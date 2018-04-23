@@ -3,7 +3,7 @@
  * Template part for displaying messages
  *
  * @author Shantanu Desai <shantanu2846@gmail.com>
- * @since 0.0.1 
+ * @since 0.0.1
  * @package course-records
  */
 
@@ -13,8 +13,8 @@
 	<?php
 	if ( is_sticky() && is_home() ) :
 		echo twentyseventeen_get_svg( array(
-			'icon' => 'pinned'
-			)
+			'icon' => 'pinned',
+		)
 		);
 	endif;
 	?>
@@ -22,13 +22,13 @@
 		<?php
 		if ( 'message' === get_post_type() ) :
 			echo '<div class="entry-meta">';
-				get_template_part( 'components/course-records/author' );
-				if ( is_single() ) :
-					twentyseventeen_posted_on();
-				else :
-					echo twentyseventeen_time_link();
-					twentyseventeen_edit_link();
-				endif;
+			get_template_part( 'components/course-records/author' );
+			if ( is_single() ) :
+				twentyseventeen_posted_on();
+			else :
+				echo twentyseventeen_time_link();
+				twentyseventeen_edit_link();
+			endif;
 			echo '</div><!-- .entry-meta -->';
 		endif;
 

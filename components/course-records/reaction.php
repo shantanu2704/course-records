@@ -3,10 +3,13 @@
  * Displays user reactions
  *
  * @author Shantanu Desai <shantanu2846@gmail.com>
- * @since 0.0.1 
+ * @since 0.0.1
  * @package course-records
  */
 
+?>
+
+<?php
 require get_parent_theme_file_path( '/inc/template-utilities.php' );
 $user_list_for_other_reactions = get_user_list_for_other_reactions();
 ?>

@@ -3,7 +3,7 @@
  * Template part for author details
  *
  * @author Shantanu Desai <shantanu2846@gmail.com>
- * @since 0.0.1 
+ * @since 0.0.1
  * @package course-records
  */
 
