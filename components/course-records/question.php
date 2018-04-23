@@ -1,42 +1,42 @@
 <?php
 /**
- * Template part for displaying posts
+ * Template part for displaying question
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.0
+ * @author Shantanu Desai <shantanu2846@gmail.com>
+ * @since 0.0.1 
+ * @package course-records
  */
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
-		if ( is_sticky() && is_home() ) :
-			echo twentyseventeen_get_svg( array( 'icon' => 'pinned' ) );
-		endif;
+	if ( is_sticky() && is_home() ) :
+		echo twentyseventeen_get_svg( array( 
+			'icon' => 'pinned' 
+			)
+		);
+	endif;
 	?>
 	<header class="entry-header">
 		<?php
-			if ( 'question' === get_post_type() ) :
-				echo '<div class="entry-meta">';
-					get_template_part( 'components/course-records/author' );
-					if ( is_single() ) :
-						twentyseventeen_posted_on();
-					else :
-						echo twentyseventeen_time_link();
-						twentyseventeen_edit_link();
-					endif;
-				echo '</div><!-- .entry-meta -->';
-			endif;
+		if ( 'question' === get_post_type() ) :
+			echo '<div class="entry-meta">';
+				get_template_part( 'components/course-records/author' );
+				if ( is_single() ) :
+					twentyseventeen_posted_on();
+				else :
+					echo twentyseventeen_time_link();
+					twentyseventeen_edit_link();
+				endif;
+			echo '</div><!-- .entry-meta -->';
+		endif;
 
-			if ( is_single() ) {
-				the_title( '<h1 class="entry-title">', '</h1>' );
-			} else {
-				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-			}
+		if ( is_single() ) {
+			the_title( '<h1 class="entry-title">', '</h1>' );
+		} else {
+			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+		}
 		?>
 	</header><!-- .entry-header -->
 
@@ -50,8 +50,8 @@
 
 	<div class="entry-content">
 		<?php
-			/* translators: %s: Name of current post */
 			the_content( sprintf(
+				/* translators: %s: Name of current post */
 				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
 				get_the_title()
 			) );
