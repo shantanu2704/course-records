@@ -5,8 +5,8 @@
  * @author Shantanu Desai <shantanu2846@gmail.com>
  * @since 0.0.1
  * @package course-records
- * 
  */
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
@@ -62,7 +62,7 @@ if ( ! class_exists( 'User_Meta' ) ) {
 		 * Save the value entered into the custom field
 		 *
 		 * @param integer $user_id The user ID of the user being edited.
-		 * 
+		 *
 		 * @since 0.0.1
 		 */
 		function save_custom_user_profile_field( $user_id ) {
