@@ -6,11 +6,12 @@
  * @since 0.0.1
  * @package course-records
  */
+
 // If this file is called directly, abort.
-if ( !defined( 'ABSPATH' ) )
+if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( !class_exists( 'Slack_Input' ) ) {
+if ( ! class_exists( 'Slack_Input' ) ) {
 
 	/**
 	 * Slack Input
@@ -21,16 +22,19 @@ if ( !class_exists( 'Slack_Input' ) ) {
 
 		/**
 		 * Contents of the json file
+		 *
+		 * @var string User input
+		 * @since 0.0.1
 		 */
 		public $input_file;
-		
+
 		/**
 		 * Name of the last input file
 		 *
 		 * @var string
 		 */
 		public $last_input;
-		
+
 		/**
 		 * ID of the newly created post
 		 *
@@ -74,7 +78,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			$files = array();
 
 			// Loop over the directory.
-			while ( false !== ($entry = readdir( $contents ) ) ) {
+			while ( ($entry = readdir( $contents ) ) !== false ) {
 				// Check if current item is a file.
 				if ( is_file( $upload_dir . $entry ) ) {
 					// If yes, push it on to the list of files.
@@ -107,7 +111,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			$uploads_path = WP_CONTENT_DIR . '/uploads/';
 
 			// Check if the form is submitted.
-			$json_import = filter_input(INPUT_POST, 'json_import' );
+			$json_import = filter_input( INPUT_POST, 'json_import' );
 			if ( isset( $json_import ) ) {
 				// Get the user input.
 				$cr_json_file = filter_input( INPUT_POST, 'cr_json_file' );
@@ -117,7 +121,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				// Store the contents of the file in the 'input_file' property.
 				$this->input_file = fread( $handle, filesize( $file_name ) );
 				// Make the current input as the 'las_input' for the next iteration.
-				$this->last_input	 = $cr_json_file;
+				$this->last_input = $cr_json_file;
 			}
 		}
 
@@ -135,7 +139,6 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			require get_parent_theme_file_path( '/modules/factory/class-post-factory.php' );
 			$post_factory = new Post_Factory();
 			foreach ( $json_input as $content ) {
-				
 				if ( $this->is_comment( $content ) ) {
 					$message_type = 'Comment';
 					$post_id = $this->get_main_post_id( $content );
@@ -149,7 +152,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 				$users = new Users();
 				$content['text'] = $users->replace_slack_user_id_with_names( $content['text'] );
 				$content['text'] = $users->replace_slack_bot_id_with_names( $content['text'] );
-				
+
 				$content['text'] = str_replace( array( '<', '>' ), '', $content['text'] );
 
 				$this->post_id = $post_factory->instantiate_classes( $content, $message_type );
@@ -174,7 +177,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 		 * Check the subtype of the message based on the presence of must-read
 		 *
 		 * @param array $content Decoded JSON message.
-		 * @return boolean|string 
+		 * @return boolean|string
 		 * @since 0.0.1
 		 */
 		private function check_message_subtype( $content ) {
@@ -203,8 +206,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 			// Check if the string appears in the message.
 			if ( strpos( $content['text'], $saurabh ) !== false ) {
 				return true;
-			}
-			else {
+			} else {
 				return false;
 			}
 		}
@@ -225,7 +227,7 @@ if ( !class_exists( 'Slack_Input' ) ) {
 						'key' => 'cr_thread_ts',
 						'value' => $value['thread_ts'],
 						'compare' => 'CHAR',
-						),
+					),
 				),
 
 			);
